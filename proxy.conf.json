@@ -1,0 +1,10 @@
+{
+    "/trades": {
+      "target": "https://localhost:3100",
+      "secure": true,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/trades": ""
+      }
+    }
+  }

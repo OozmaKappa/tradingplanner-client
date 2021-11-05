@@ -3,12 +3,12 @@ import { FuseNavigationItem } from '@fuse/components/navigation';
 
 export const defaultNavigation: FuseNavigationItem[] = [
     {
-        id   : 'example',
-        title: 'Example',
+        id   : 'finance',
+        title: 'Finance',
         type : 'basic',
-        icon : 'heroicons_outline:chart-pie',
-        link : '/example'
-    }
+        icon : 'heroicons_outline:cash',
+        link : '/finance'
+    },
 ];
 export const compactNavigation: FuseNavigationItem[] = [
     {
