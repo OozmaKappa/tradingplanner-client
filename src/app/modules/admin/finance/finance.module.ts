@@ -14,6 +14,7 @@ import { SharedModule } from 'app/shared/shared.module';
 import { FinanceComponent } from 'app/modules/admin/finance/finance.component';
 import { financeRoutes } from 'app/modules/admin/finance/finance.routing';
 import { FuseCardModule } from '@fuse/components/card';
+import { TradeModule } from '../trade/trade.module';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { FuseCardModule } from '@fuse/components/card';
         MatTableModule,
         NgApexchartsModule,
         SharedModule,
-        HttpClientModule
+        HttpClientModule,
+        TradeModule
     ]
 })
 export class FinanceModule

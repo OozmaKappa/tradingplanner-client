@@ -12,9 +12,9 @@ import { AnalyticsService } from '../analytics/analytics.service';
     encapsulation  : ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FinanceComponent implements OnInit, AfterViewInit, OnDestroy
+export class FinanceComponent implements OnInit, OnDestroy
 {
-    @ViewChild('recentTransactionsTable', {read: MatSort}) recentTransactionsTableMatSort: MatSort;
+    // @ViewChild('recentTransactionsTable', {read: MatSort}) recentTransactionsTableMatSort: MatSort;
     chartImpressions: ApexOptions;
     data: any;
     data1: any;
@@ -70,14 +70,14 @@ export class FinanceComponent implements OnInit, AfterViewInit, OnDestroy
             });
     }
 
-    /**
-     * After view init
-     */
-    ngAfterViewInit(): void
-    {
-        // Make the data source sortable
-        this.recentTransactionsDataSource.sort = this.recentTransactionsTableMatSort;
-    }
+    // /**
+    //  * After view init
+    //  */
+    // ngAfterViewInit(): void
+    // {
+    //     // Make the data source sortable
+    //     this.recentTransactionsDataSource.sort = this.recentTransactionsTableMatSort;
+    // }
 
     /**
      * On destroy
@@ -159,7 +159,7 @@ export class FinanceComponent implements OnInit, AfterViewInit, OnDestroy
             }
         };
     }
-    private _prepareChartData1():void{
+    private _prepareChartData1(): void{
         this.chartImpressions = {
             chart  : {
                 animations: {
