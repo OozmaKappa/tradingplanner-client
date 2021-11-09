@@ -6,7 +6,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { FuseFullscreenModule } from '@fuse/components/fullscreen';
-import { FuseLoadingBarModule } from '@fuse/components/loading-bar';
 import { FuseNavigationModule } from '@fuse/components/navigation';
 import { LanguagesModule } from 'app/layout/common/languages/languages.module';
 import { MessagesModule } from 'app/layout/common/messages/messages.module';
@@ -30,7 +29,6 @@ import { DenseLayoutComponent } from 'app/layout/layouts/vertical/dense/dense.co
         MatIconModule,
         MatMenuModule,
         FuseFullscreenModule,
-        FuseLoadingBarModule,
         FuseNavigationModule,
         LanguagesModule,
         MessagesModule,

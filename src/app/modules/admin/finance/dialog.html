@@ -1,0 +1,73 @@
+<div class="w-full flex flex-col">
+    <h1 mat-dialog-title>New Trade</h1>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div mat-dialog-content style="height: 500px;">
+            <div [formGroupName]="'strategy'">
+                <div class="flex w-full">
+                    <div class="mr-5 w-1/2">
+                        <mat-button-toggle-group class="hidden sm:inline-flex border-none space-x-1" value="BUY"
+                            #visitorsYearSelector="matButtonToggleGroup" [formControlName]="'side'" title="side">
+                            <mat-button-toggle class="px-1.5 rounded-full overflow-hidden border-none font-medium"
+                                value="BUY">Buy
+                            </mat-button-toggle>
+                            <mat-button-toggle class="px-1.5 rounded-full overflow-hidden border-none font-medium"
+                                value="SELL">Sell
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
+                        <div class="sm:hidden">
+                            <button mat-icon-button [matMenuTriggerFor]="visitorsMenu">
+                                <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
+                            </button>
+                            <mat-menu #visitorsMenu="matMenu">
+                                <button mat-menu-item>Buy</button>
+                                <button mat-menu-item>Sell</button>
+                            </mat-menu>
+                        </div>
+                    </div>
+                    <mat-form-field class="flex-auto w-1/2">
+                        <mat-label>Trade Type</mat-label>
+                        <mat-select [value]="'STK'" [formControlName]="'trade_type'" title="trade_type">
+                            <mat-option [value]="'STK'">Stock</mat-option>
+                            <mat-option [value]="'US'">US</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field class="flex-auto w-1/2 mr-2">
+                        <mat-label>Ticker</mat-label>
+                        <input matInput [formControlName]="'ticker'" title="ticker">
+                    </mat-form-field>
+                    <mat-form-field class="flex-auto w-1/2 ml-2">
+                        <mat-label>Amount</mat-label>
+                        <span matPrefix>$</span>
+                        <input matInput type="number" [formControlName]="'amount'" title="amount">
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field class="flex-auto w-1/2 mr-2">
+                        <mat-label>Price</mat-label>
+                        <span matPrefix>$</span>
+                        <input matInput type="number" [formControlName]="'price'" title="price">
+                    </mat-form-field>
+                    <mat-form-field class="flex-auto w-1/2 ml-2">
+                        <mat-label>Order Type</mat-label>
+                        <mat-select [value]="'LMT'" [formControlName]="'order_type'" title="order_type">
+                            <mat-option [value]="'LMT'">Limit</mat-option>
+                            <mat-option [value]="'no LMT'">No Limit</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="flex">
+                    <mat-form-field class="fuse-mat-textarea flex-auto">
+                        <mat-label>Comments</mat-label>
+                        <textarea matInput [formControlName]="'comments'" title="comments" cdkTextareaAutosize
+                            cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="flex" mat-dialog-actions style="float: right;margin-top: -20px;">
+                    <button mat-raised-button mat-dialog-close type="submit">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -9,6 +9,7 @@
 
 # dependencies
 /node_modules
+/cors-anywhere
 
 # profiling files
 chrome-profiler-events*.json

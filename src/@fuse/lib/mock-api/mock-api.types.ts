@@ -8,9 +8,6 @@ export type FuseMockApiReplyCallback =
 export type FuseMockApiMethods =
     | 'get'
     | 'post'
-    | 'patch'
-    | 'delete'
     | 'put'
-    | 'head'
-    | 'jsonp'
-    | 'options';
+    | 'patch'
+    | 'delete';

@@ -6,491 +6,491 @@ export const finance = {
         growRate: 38.33,
         ami     : 45332,
         series  : [
-            {
-                name: 'Predicted',
-                data: [
-                    {
-                        x: moment().subtract(12, 'months').day(1).toDate(),
-                        y: 48.84
-                    },
-                    {
-                        x: moment().subtract(12, 'months').day(4).toDate(),
-                        y: 53.51
-                    },
-                    {
-                        x: moment().subtract(12, 'months').day(7).toDate(),
-                        y: 52.93
-                    },
-                    {
-                        x: moment().subtract(12, 'months').day(10).toDate(),
-                        y: 49.08
-                    },
-                    {
-                        x: moment().subtract(12, 'months').day(13).toDate(),
-                        y: 50.27
-                    },
-                    {
-                        x: moment().subtract(12, 'months').day(16).toDate(),
-                        y: 48.37
-                    },
-                    {
-                        x: moment().subtract(12, 'months').day(19).toDate(),
-                        y: 44.84
-                    },
-                    {
-                        x: moment().subtract(12, 'months').day(22).toDate(),
-                        y: 40.71
-                    },
-                    {
-                        x: moment().subtract(12, 'months').day(25).toDate(),
-                        y: 41.24
-                    },
-                    {
-                        x: moment().subtract(12, 'months').day(28).toDate(),
-                        y: 45.63
-                    },
-                    {
-                        x: moment().subtract(11, 'months').day(1).toDate(),
-                        y: 38.20
-                    },
-                    {
-                        x: moment().subtract(11, 'months').day(4).toDate(),
-                        y: 39.68
-                    },
-                    {
-                        x: moment().subtract(11, 'months').day(7).toDate(),
-                        y: 41.02
-                    },
-                    {
-                        x: moment().subtract(11, 'months').day(10).toDate(),
-                        y: 39.41
-                    },
-                    {
-                        x: moment().subtract(11, 'months').day(13).toDate(),
-                        y: 35.66
-                    },
-                    {
-                        x: moment().subtract(11, 'months').day(16).toDate(),
-                        y: 38.53
-                    },
-                    {
-                        x: moment().subtract(11, 'months').day(19).toDate(),
-                        y: 38.53
-                    },
-                    {
-                        x: moment().subtract(11, 'months').day(22).toDate(),
-                        y: 40.69
-                    },
-                    {
-                        x: moment().subtract(11, 'months').day(25).toDate(),
-                        y: 38.79
-                    },
-                    {
-                        x: moment().subtract(11, 'months').day(28).toDate(),
-                        y: 42.98
-                    },
-                    {
-                        x: moment().subtract(10, 'months').day(1).toDate(),
-                        y: 43.55
-                    },
-                    {
-                        x: moment().subtract(10, 'months').day(4).toDate(),
-                        y: 40.65
-                    },
-                    {
-                        x: moment().subtract(10, 'months').day(7).toDate(),
-                        y: 36.50
-                    },
-                    {
-                        x: moment().subtract(10, 'months').day(10).toDate(),
-                        y: 33.79
-                    },
-                    {
-                        x: moment().subtract(10, 'months').day(13).toDate(),
-                        y: 31.91
-                    },
-                    {
-                        x: moment().subtract(10, 'months').day(16).toDate(),
-                        y: 29.68
-                    },
-                    {
-                        x: moment().subtract(10, 'months').day(19).toDate(),
-                        y: 29.57
-                    },
-                    {
-                        x: moment().subtract(10, 'months').day(22).toDate(),
-                        y: 33.13
-                    },
-                    {
-                        x: moment().subtract(10, 'months').day(25).toDate(),
-                        y: 37.08
-                    },
-                    {
-                        x: moment().subtract(10, 'months').day(28).toDate(),
-                        y: 35.86
-                    },
-                    {
-                        x: moment().subtract(9, 'months').day(1).toDate(),
-                        y: 39.65
-                    },
-                    {
-                        x: moment().subtract(9, 'months').day(4).toDate(),
-                        y: 39.01
-                    },
-                    {
-                        x: moment().subtract(9, 'months').day(7).toDate(),
-                        y: 34.10
-                    },
-                    {
-                        x: moment().subtract(9, 'months').day(10).toDate(),
-                        y: 37.48
-                    },
-                    {
-                        x: moment().subtract(9, 'months').day(13).toDate(),
-                        y: 39.29
-                    },
-                    {
-                        x: moment().subtract(9, 'months').day(16).toDate(),
-                        y: 38.46
-                    },
-                    {
-                        x: moment().subtract(9, 'months').day(19).toDate(),
-                        y: 37.71
-                    },
-                    {
-                        x: moment().subtract(9, 'months').day(22).toDate(),
-                        y: 40.15
-                    },
-                    {
-                        x: moment().subtract(9, 'months').day(25).toDate(),
-                        y: 35.89
-                    },
-                    {
-                        x: moment().subtract(9, 'months').day(28).toDate(),
-                        y: 31.50
-                    },
-                    {
-                        x: moment().subtract(8, 'months').day(1).toDate(),
-                        y: 30.50
-                    },
-                    {
-                        x: moment().subtract(8, 'months').day(4).toDate(),
-                        y: 25.74
-                    },
-                    {
-                        x: moment().subtract(8, 'months').day(7).toDate(),
-                        y: 28.23
-                    },
-                    {
-                        x: moment().subtract(8, 'months').day(10).toDate(),
-                        y: 28.48
-                    },
-                    {
-                        x: moment().subtract(8, 'months').day(13).toDate(),
-                        y: 30.00
-                    },
-                    {
-                        x: moment().subtract(8, 'months').day(16).toDate(),
-                        y: 32.16
-                    },
-                    {
-                        x: moment().subtract(8, 'months').day(19).toDate(),
-                        y: 32.99
-                    },
-                    {
-                        x: moment().subtract(8, 'months').day(22).toDate(),
-                        y: 37.68
-                    },
-                    {
-                        x: moment().subtract(8, 'months').day(25).toDate(),
-                        y: 35.24
-                    },
-                    {
-                        x: moment().subtract(8, 'months').day(28).toDate(),
-                        y: 39.18
-                    },
-                    {
-                        x: moment().subtract(7, 'months').day(1).toDate(),
-                        y: 41.45
-                    },
-                    {
-                        x: moment().subtract(7, 'months').day(4).toDate(),
-                        y: 43.78
-                    },
-                    {
-                        x: moment().subtract(7, 'months').day(7).toDate(),
-                        y: 39.41
-                    },
-                    {
-                        x: moment().subtract(7, 'months').day(10).toDate(),
-                        y: 39.32
-                    },
-                    {
-                        x: moment().subtract(7, 'months').day(13).toDate(),
-                        y: 43.80
-                    },
-                    {
-                        x: moment().subtract(7, 'months').day(16).toDate(),
-                        y: 42.43
-                    },
-                    {
-                        x: moment().subtract(7, 'months').day(19).toDate(),
-                        y: 43.67
-                    },
-                    {
-                        x: moment().subtract(7, 'months').day(22).toDate(),
-                        y: 38.79
-                    },
-                    {
-                        x: moment().subtract(7, 'months').day(25).toDate(),
-                        y: 43.57
-                    },
-                    {
-                        x: moment().subtract(7, 'months').day(28).toDate(),
-                        y: 41.81
-                    },
-                    {
-                        x: moment().subtract(6, 'months').day(1).toDate(),
-                        y: 46.19
-                    },
-                    {
-                        x: moment().subtract(6, 'months').day(4).toDate(),
-                        y: 47.69
-                    },
-                    {
-                        x: moment().subtract(6, 'months').day(7).toDate(),
-                        y: 49.01
-                    },
-                    {
-                        x: moment().subtract(6, 'months').day(10).toDate(),
-                        y: 46.40
-                    },
-                    {
-                        x: moment().subtract(6, 'months').day(13).toDate(),
-                        y: 51.28
-                    },
-                    {
-                        x: moment().subtract(6, 'months').day(16).toDate(),
-                        y: 50.15
-                    },
-                    {
-                        x: moment().subtract(6, 'months').day(19).toDate(),
-                        y: 53.60
-                    },
-                    {
-                        x: moment().subtract(6, 'months').day(22).toDate(),
-                        y: 56.08
-                    },
-                    {
-                        x: moment().subtract(6, 'months').day(25).toDate(),
-                        y: 52.72
-                    },
-                    {
-                        x: moment().subtract(6, 'months').day(28).toDate(),
-                        y: 56.60
-                    },
-                    {
-                        x: moment().subtract(5, 'months').day(1).toDate(),
-                        y: 58.36
-                    },
-                    {
-                        x: moment().subtract(5, 'months').day(4).toDate(),
-                        y: 56.59
-                    },
-                    {
-                        x: moment().subtract(5, 'months').day(7).toDate(),
-                        y: 55.75
-                    },
-                    {
-                        x: moment().subtract(5, 'months').day(10).toDate(),
-                        y: 54.74
-                    },
-                    {
-                        x: moment().subtract(5, 'months').day(13).toDate(),
-                        y: 54.27
-                    },
-                    {
-                        x: moment().subtract(5, 'months').day(16).toDate(),
-                        y: 58.65
-                    },
-                    {
-                        x: moment().subtract(5, 'months').day(19).toDate(),
-                        y: 57.00
-                    },
-                    {
-                        x: moment().subtract(5, 'months').day(22).toDate(),
-                        y: 60.52
-                    },
-                    {
-                        x: moment().subtract(5, 'months').day(25).toDate(),
-                        y: 57.60
-                    },
-                    {
-                        x: moment().subtract(5, 'months').day(28).toDate(),
-                        y: 56.48
-                    },
-                    {
-                        x: moment().subtract(4, 'months').day(1).toDate(),
-                        y: 54.35
-                    },
-                    {
-                        x: moment().subtract(4, 'months').day(4).toDate(),
-                        y: 52.39
-                    },
-                    {
-                        x: moment().subtract(4, 'months').day(7).toDate(),
-                        y: 54.52
-                    },
-                    {
-                        x: moment().subtract(4, 'months').day(10).toDate(),
-                        y: 54.16
-                    },
-                    {
-                        x: moment().subtract(4, 'months').day(13).toDate(),
-                        y: 51.95
-                    },
-                    {
-                        x: moment().subtract(4, 'months').day(16).toDate(),
-                        y: 51.19
-                    },
-                    {
-                        x: moment().subtract(4, 'months').day(19).toDate(),
-                        y: 46.35
-                    },
-                    {
-                        x: moment().subtract(4, 'months').day(22).toDate(),
-                        y: 48.33
-                    },
-                    {
-                        x: moment().subtract(4, 'months').day(25).toDate(),
-                        y: 45.84
-                    },
-                    {
-                        x: moment().subtract(4, 'months').day(28).toDate(),
-                        y: 48.22
-                    },
-                    {
-                        x: moment().subtract(3, 'months').day(1).toDate(),
-                        y: 45.82
-                    },
-                    {
-                        x: moment().subtract(3, 'months').day(4).toDate(),
-                        y: 43.48
-                    },
-                    {
-                        x: moment().subtract(3, 'months').day(7).toDate(),
-                        y: 41.32
-                    },
-                    {
-                        x: moment().subtract(3, 'months').day(10).toDate(),
-                        y: 40.99
-                    },
-                    {
-                        x: moment().subtract(3, 'months').day(13).toDate(),
-                        y: 38.49
-                    },
-                    {
-                        x: moment().subtract(3, 'months').day(16).toDate(),
-                        y: 40.10
-                    },
-                    {
-                        x: moment().subtract(3, 'months').day(19).toDate(),
-                        y: 44.86
-                    },
-                    {
-                        x: moment().subtract(3, 'months').day(22).toDate(),
-                        y: 44.03
-                    },
-                    {
-                        x: moment().subtract(3, 'months').day(25).toDate(),
-                        y: 41.41
-                    },
-                    {
-                        x: moment().subtract(3, 'months').day(28).toDate(),
-                        y: 37.80
-                    },
-                    {
-                        x: moment().subtract(2, 'months').day(1).toDate(),
-                        y: 35.24
-                    },
-                    {
-                        x: moment().subtract(2, 'months').day(4).toDate(),
-                        y: 32.12
-                    },
-                    {
-                        x: moment().subtract(2, 'months').day(7).toDate(),
-                        y: 35.68
-                    },
-                    {
-                        x: moment().subtract(2, 'months').day(10).toDate(),
-                        y: 38.00
-                    },
-                    {
-                        x: moment().subtract(2, 'months').day(13).toDate(),
-                        y: 37.96
-                    },
-                    {
-                        x: moment().subtract(2, 'months').day(16).toDate(),
-                        y: 38.70
-                    },
-                    {
-                        x: moment().subtract(2, 'months').day(19).toDate(),
-                        y: 37.45
-                    },
-                    {
-                        x: moment().subtract(2, 'months').day(22).toDate(),
-                        y: 37.51
-                    },
-                    {
-                        x: moment().subtract(2, 'months').day(25).toDate(),
-                        y: 33.10
-                    },
-                    {
-                        x: moment().subtract(2, 'months').day(28).toDate(),
-                        y: 35.09
-                    },
-                    {
-                        x: moment().subtract(1, 'months').day(1).toDate(),
-                        y: 31.87
-                    },
-                    {
-                        x: moment().subtract(1, 'months').day(4).toDate(),
-                        y: 29.18
-                    },
-                    {
-                        x: moment().subtract(1, 'months').day(7).toDate(),
-                        y: 31.91
-                    },
-                    {
-                        x: moment().subtract(1, 'months').day(10).toDate(),
-                        y: 34.37
-                    },
-                    {
-                        x: moment().subtract(1, 'months').day(13).toDate(),
-                        y: 32.91
-                    },
-                    {
-                        x: moment().subtract(1, 'months').day(16).toDate(),
-                        y: 33.17
-                    },
-                    {
-                        x: moment().subtract(1, 'months').day(19).toDate(),
-                        y: 37.16
-                    },
-                    {
-                        x: moment().subtract(1, 'months').day(22).toDate(),
-                        y: 32.60
-                    },
-                    {
-                        x: moment().subtract(1, 'months').day(25).toDate(),
-                        y: 36.94
-                    },
-                    {
-                        x: moment().subtract(1, 'months').day(28).toDate(),
-                        y: 35.98
-                    }
-                ]
-            },
+            // {
+            //     name: 'Predicted',
+            //     data: [
+            //         {
+            //             x: moment().subtract(12, 'months').day(1).toDate(),
+            //             y: 48.84
+            //         },
+            //         {
+            //             x: moment().subtract(12, 'months').day(4).toDate(),
+            //             y: 53.51
+            //         },
+            //         {
+            //             x: moment().subtract(12, 'months').day(7).toDate(),
+            //             y: 52.93
+            //         },
+            //         {
+            //             x: moment().subtract(12, 'months').day(10).toDate(),
+            //             y: 49.08
+            //         },
+            //         {
+            //             x: moment().subtract(12, 'months').day(13).toDate(),
+            //             y: 50.27
+            //         },
+            //         {
+            //             x: moment().subtract(12, 'months').day(16).toDate(),
+            //             y: 48.37
+            //         },
+            //         {
+            //             x: moment().subtract(12, 'months').day(19).toDate(),
+            //             y: 44.84
+            //         },
+            //         {
+            //             x: moment().subtract(12, 'months').day(22).toDate(),
+            //             y: 40.71
+            //         },
+            //         {
+            //             x: moment().subtract(12, 'months').day(25).toDate(),
+            //             y: 41.24
+            //         },
+            //         {
+            //             x: moment().subtract(12, 'months').day(28).toDate(),
+            //             y: 45.63
+            //         },
+            //         {
+            //             x: moment().subtract(11, 'months').day(1).toDate(),
+            //             y: 38.20
+            //         },
+            //         {
+            //             x: moment().subtract(11, 'months').day(4).toDate(),
+            //             y: 39.68
+            //         },
+            //         {
+            //             x: moment().subtract(11, 'months').day(7).toDate(),
+            //             y: 41.02
+            //         },
+            //         {
+            //             x: moment().subtract(11, 'months').day(10).toDate(),
+            //             y: 39.41
+            //         },
+            //         {
+            //             x: moment().subtract(11, 'months').day(13).toDate(),
+            //             y: 35.66
+            //         },
+            //         {
+            //             x: moment().subtract(11, 'months').day(16).toDate(),
+            //             y: 38.53
+            //         },
+            //         {
+            //             x: moment().subtract(11, 'months').day(19).toDate(),
+            //             y: 38.53
+            //         },
+            //         {
+            //             x: moment().subtract(11, 'months').day(22).toDate(),
+            //             y: 40.69
+            //         },
+            //         {
+            //             x: moment().subtract(11, 'months').day(25).toDate(),
+            //             y: 38.79
+            //         },
+            //         {
+            //             x: moment().subtract(11, 'months').day(28).toDate(),
+            //             y: 42.98
+            //         },
+            //         {
+            //             x: moment().subtract(10, 'months').day(1).toDate(),
+            //             y: 43.55
+            //         },
+            //         {
+            //             x: moment().subtract(10, 'months').day(4).toDate(),
+            //             y: 40.65
+            //         },
+            //         {
+            //             x: moment().subtract(10, 'months').day(7).toDate(),
+            //             y: 36.50
+            //         },
+            //         {
+            //             x: moment().subtract(10, 'months').day(10).toDate(),
+            //             y: 33.79
+            //         },
+            //         {
+            //             x: moment().subtract(10, 'months').day(13).toDate(),
+            //             y: 31.91
+            //         },
+            //         {
+            //             x: moment().subtract(10, 'months').day(16).toDate(),
+            //             y: 29.68
+            //         },
+            //         {
+            //             x: moment().subtract(10, 'months').day(19).toDate(),
+            //             y: 29.57
+            //         },
+            //         {
+            //             x: moment().subtract(10, 'months').day(22).toDate(),
+            //             y: 33.13
+            //         },
+            //         {
+            //             x: moment().subtract(10, 'months').day(25).toDate(),
+            //             y: 37.08
+            //         },
+            //         {
+            //             x: moment().subtract(10, 'months').day(28).toDate(),
+            //             y: 35.86
+            //         },
+            //         {
+            //             x: moment().subtract(9, 'months').day(1).toDate(),
+            //             y: 39.65
+            //         },
+            //         {
+            //             x: moment().subtract(9, 'months').day(4).toDate(),
+            //             y: 39.01
+            //         },
+            //         {
+            //             x: moment().subtract(9, 'months').day(7).toDate(),
+            //             y: 34.10
+            //         },
+            //         {
+            //             x: moment().subtract(9, 'months').day(10).toDate(),
+            //             y: 37.48
+            //         },
+            //         {
+            //             x: moment().subtract(9, 'months').day(13).toDate(),
+            //             y: 39.29
+            //         },
+            //         {
+            //             x: moment().subtract(9, 'months').day(16).toDate(),
+            //             y: 38.46
+            //         },
+            //         {
+            //             x: moment().subtract(9, 'months').day(19).toDate(),
+            //             y: 37.71
+            //         },
+            //         {
+            //             x: moment().subtract(9, 'months').day(22).toDate(),
+            //             y: 40.15
+            //         },
+            //         {
+            //             x: moment().subtract(9, 'months').day(25).toDate(),
+            //             y: 35.89
+            //         },
+            //         {
+            //             x: moment().subtract(9, 'months').day(28).toDate(),
+            //             y: 31.50
+            //         },
+            //         {
+            //             x: moment().subtract(8, 'months').day(1).toDate(),
+            //             y: 30.50
+            //         },
+            //         {
+            //             x: moment().subtract(8, 'months').day(4).toDate(),
+            //             y: 25.74
+            //         },
+            //         {
+            //             x: moment().subtract(8, 'months').day(7).toDate(),
+            //             y: 28.23
+            //         },
+            //         {
+            //             x: moment().subtract(8, 'months').day(10).toDate(),
+            //             y: 28.48
+            //         },
+            //         {
+            //             x: moment().subtract(8, 'months').day(13).toDate(),
+            //             y: 30.00
+            //         },
+            //         {
+            //             x: moment().subtract(8, 'months').day(16).toDate(),
+            //             y: 32.16
+            //         },
+            //         {
+            //             x: moment().subtract(8, 'months').day(19).toDate(),
+            //             y: 32.99
+            //         },
+            //         {
+            //             x: moment().subtract(8, 'months').day(22).toDate(),
+            //             y: 37.68
+            //         },
+            //         {
+            //             x: moment().subtract(8, 'months').day(25).toDate(),
+            //             y: 35.24
+            //         },
+            //         {
+            //             x: moment().subtract(8, 'months').day(28).toDate(),
+            //             y: 39.18
+            //         },
+            //         {
+            //             x: moment().subtract(7, 'months').day(1).toDate(),
+            //             y: 41.45
+            //         },
+            //         {
+            //             x: moment().subtract(7, 'months').day(4).toDate(),
+            //             y: 43.78
+            //         },
+            //         {
+            //             x: moment().subtract(7, 'months').day(7).toDate(),
+            //             y: 39.41
+            //         },
+            //         {
+            //             x: moment().subtract(7, 'months').day(10).toDate(),
+            //             y: 39.32
+            //         },
+            //         {
+            //             x: moment().subtract(7, 'months').day(13).toDate(),
+            //             y: 43.80
+            //         },
+            //         {
+            //             x: moment().subtract(7, 'months').day(16).toDate(),
+            //             y: 42.43
+            //         },
+            //         {
+            //             x: moment().subtract(7, 'months').day(19).toDate(),
+            //             y: 43.67
+            //         },
+            //         {
+            //             x: moment().subtract(7, 'months').day(22).toDate(),
+            //             y: 38.79
+            //         },
+            //         {
+            //             x: moment().subtract(7, 'months').day(25).toDate(),
+            //             y: 43.57
+            //         },
+            //         {
+            //             x: moment().subtract(7, 'months').day(28).toDate(),
+            //             y: 41.81
+            //         },
+            //         {
+            //             x: moment().subtract(6, 'months').day(1).toDate(),
+            //             y: 46.19
+            //         },
+            //         {
+            //             x: moment().subtract(6, 'months').day(4).toDate(),
+            //             y: 47.69
+            //         },
+            //         {
+            //             x: moment().subtract(6, 'months').day(7).toDate(),
+            //             y: 49.01
+            //         },
+            //         {
+            //             x: moment().subtract(6, 'months').day(10).toDate(),
+            //             y: 46.40
+            //         },
+            //         {
+            //             x: moment().subtract(6, 'months').day(13).toDate(),
+            //             y: 51.28
+            //         },
+            //         {
+            //             x: moment().subtract(6, 'months').day(16).toDate(),
+            //             y: 50.15
+            //         },
+            //         {
+            //             x: moment().subtract(6, 'months').day(19).toDate(),
+            //             y: 53.60
+            //         },
+            //         {
+            //             x: moment().subtract(6, 'months').day(22).toDate(),
+            //             y: 56.08
+            //         },
+            //         {
+            //             x: moment().subtract(6, 'months').day(25).toDate(),
+            //             y: 52.72
+            //         },
+            //         {
+            //             x: moment().subtract(6, 'months').day(28).toDate(),
+            //             y: 56.60
+            //         },
+            //         {
+            //             x: moment().subtract(5, 'months').day(1).toDate(),
+            //             y: 58.36
+            //         },
+            //         {
+            //             x: moment().subtract(5, 'months').day(4).toDate(),
+            //             y: 56.59
+            //         },
+            //         {
+            //             x: moment().subtract(5, 'months').day(7).toDate(),
+            //             y: 55.75
+            //         },
+            //         {
+            //             x: moment().subtract(5, 'months').day(10).toDate(),
+            //             y: 54.74
+            //         },
+            //         {
+            //             x: moment().subtract(5, 'months').day(13).toDate(),
+            //             y: 54.27
+            //         },
+            //         {
+            //             x: moment().subtract(5, 'months').day(16).toDate(),
+            //             y: 58.65
+            //         },
+            //         {
+            //             x: moment().subtract(5, 'months').day(19).toDate(),
+            //             y: 57.00
+            //         },
+            //         {
+            //             x: moment().subtract(5, 'months').day(22).toDate(),
+            //             y: 60.52
+            //         },
+            //         {
+            //             x: moment().subtract(5, 'months').day(25).toDate(),
+            //             y: 57.60
+            //         },
+            //         {
+            //             x: moment().subtract(5, 'months').day(28).toDate(),
+            //             y: 56.48
+            //         },
+            //         {
+            //             x: moment().subtract(4, 'months').day(1).toDate(),
+            //             y: 54.35
+            //         },
+            //         {
+            //             x: moment().subtract(4, 'months').day(4).toDate(),
+            //             y: 52.39
+            //         },
+            //         {
+            //             x: moment().subtract(4, 'months').day(7).toDate(),
+            //             y: 54.52
+            //         },
+            //         {
+            //             x: moment().subtract(4, 'months').day(10).toDate(),
+            //             y: 54.16
+            //         },
+            //         {
+            //             x: moment().subtract(4, 'months').day(13).toDate(),
+            //             y: 51.95
+            //         },
+            //         {
+            //             x: moment().subtract(4, 'months').day(16).toDate(),
+            //             y: 51.19
+            //         },
+            //         {
+            //             x: moment().subtract(4, 'months').day(19).toDate(),
+            //             y: 46.35
+            //         },
+            //         {
+            //             x: moment().subtract(4, 'months').day(22).toDate(),
+            //             y: 48.33
+            //         },
+            //         {
+            //             x: moment().subtract(4, 'months').day(25).toDate(),
+            //             y: 45.84
+            //         },
+            //         {
+            //             x: moment().subtract(4, 'months').day(28).toDate(),
+            //             y: 48.22
+            //         },
+            //         {
+            //             x: moment().subtract(3, 'months').day(1).toDate(),
+            //             y: 45.82
+            //         },
+            //         {
+            //             x: moment().subtract(3, 'months').day(4).toDate(),
+            //             y: 43.48
+            //         },
+            //         {
+            //             x: moment().subtract(3, 'months').day(7).toDate(),
+            //             y: 41.32
+            //         },
+            //         {
+            //             x: moment().subtract(3, 'months').day(10).toDate(),
+            //             y: 40.99
+            //         },
+            //         {
+            //             x: moment().subtract(3, 'months').day(13).toDate(),
+            //             y: 38.49
+            //         },
+            //         {
+            //             x: moment().subtract(3, 'months').day(16).toDate(),
+            //             y: 40.10
+            //         },
+            //         {
+            //             x: moment().subtract(3, 'months').day(19).toDate(),
+            //             y: 44.86
+            //         },
+            //         {
+            //             x: moment().subtract(3, 'months').day(22).toDate(),
+            //             y: 44.03
+            //         },
+            //         {
+            //             x: moment().subtract(3, 'months').day(25).toDate(),
+            //             y: 41.41
+            //         },
+            //         {
+            //             x: moment().subtract(3, 'months').day(28).toDate(),
+            //             y: 37.80
+            //         },
+            //         {
+            //             x: moment().subtract(2, 'months').day(1).toDate(),
+            //             y: 35.24
+            //         },
+            //         {
+            //             x: moment().subtract(2, 'months').day(4).toDate(),
+            //             y: 32.12
+            //         },
+            //         {
+            //             x: moment().subtract(2, 'months').day(7).toDate(),
+            //             y: 35.68
+            //         },
+            //         {
+            //             x: moment().subtract(2, 'months').day(10).toDate(),
+            //             y: 38.00
+            //         },
+            //         {
+            //             x: moment().subtract(2, 'months').day(13).toDate(),
+            //             y: 37.96
+            //         },
+            //         {
+            //             x: moment().subtract(2, 'months').day(16).toDate(),
+            //             y: 38.70
+            //         },
+            //         {
+            //             x: moment().subtract(2, 'months').day(19).toDate(),
+            //             y: 37.45
+            //         },
+            //         {
+            //             x: moment().subtract(2, 'months').day(22).toDate(),
+            //             y: 37.51
+            //         },
+            //         {
+            //             x: moment().subtract(2, 'months').day(25).toDate(),
+            //             y: 33.10
+            //         },
+            //         {
+            //             x: moment().subtract(2, 'months').day(28).toDate(),
+            //             y: 35.09
+            //         },
+            //         {
+            //             x: moment().subtract(1, 'months').day(1).toDate(),
+            //             y: 31.87
+            //         },
+            //         {
+            //             x: moment().subtract(1, 'months').day(4).toDate(),
+            //             y: 29.18
+            //         },
+            //         {
+            //             x: moment().subtract(1, 'months').day(7).toDate(),
+            //             y: 31.91
+            //         },
+            //         {
+            //             x: moment().subtract(1, 'months').day(10).toDate(),
+            //             y: 34.37
+            //         },
+            //         {
+            //             x: moment().subtract(1, 'months').day(13).toDate(),
+            //             y: 32.91
+            //         },
+            //         {
+            //             x: moment().subtract(1, 'months').day(16).toDate(),
+            //             y: 33.17
+            //         },
+            //         {
+            //             x: moment().subtract(1, 'months').day(19).toDate(),
+            //             y: 37.16
+            //         },
+            //         {
+            //             x: moment().subtract(1, 'months').day(22).toDate(),
+            //             y: 32.60
+            //         },
+            //         {
+            //             x: moment().subtract(1, 'months').day(25).toDate(),
+            //             y: 36.94
+            //         },
+            //         {
+            //             x: moment().subtract(1, 'months').day(28).toDate(),
+            //             y: 35.98
+            //         }
+            //     ]
+            // },
             {
                 name: 'Actual',
                 data: [
