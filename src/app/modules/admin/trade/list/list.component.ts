@@ -112,9 +112,9 @@ export class TradeListComponent implements OnInit, OnDestroy
         this._matDialog.open(TradeDetailsComponent, {
             autoFocus: false
         });
-        this._matDialog.afterAllClosed.subscribe(()=>{
-            console.log('Get trades after close dialog');
-            this._tradeService.getTrades();
-        });
+        // this._matDialog.afterAllClosed.subscribe(()=>{
+        //     console.log('Get trades after close dialog');
+        //     this._tradeService.getTrades();
+        // });
     }
 }

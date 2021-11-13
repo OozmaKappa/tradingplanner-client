@@ -15,7 +15,7 @@
     <!-- Form -->
     <form 
     class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto"
-    [formGroup]="tradeForm" (ngSubmit)="onSubmit(tradeForm)">
+    [formGroup]="tradeForm">
         <div class="flex items-center w-full mt-6 grid grid-cols-2 md:grid-cols-3 gap-4">
             <mat-button-toggle-group formControlName="side" aria-label="Side" class="flex-auto pr-2">
                 <mat-button-toggle class="flex-auto w-full" [value]="'BUY'">
@@ -86,7 +86,7 @@
             </div>
 
             <div class="flex items-center mt-4 sm:mt-0">
-                <button mat-raised-button mat-dialog-close [disabled]="!tradeForm.valid" type="submit" data-action="save">Save</button>
+                <button mat-raised-button mat-dialog-close [disabled]="!tradeForm.valid" (click)="onSubmit(tradeForm)">Save</button>
             </div>
         </div>
     </form>
