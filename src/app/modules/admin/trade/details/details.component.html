@@ -1,0 +1,93 @@
+<div class="flex flex-col max-w-340 md:min-w-200 max-h-screen -m-6">
+    <!-- Header -->
+    <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+        <div class="text-lg font-medium">New Trade</div>
+        <button
+            mat-icon-button
+            (click)="onNoClick()"
+            [tabIndex]="-1">
+            <mat-icon
+                class="text-current"
+                [svgIcon]="'heroicons_outline:x'"></mat-icon>
+        </button>
+    </div>
+
+    <!-- Form -->
+    <form 
+    class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto"
+    [formGroup]="tradeForm" (ngSubmit)="onSubmit(tradeForm)">
+        <div class="flex items-center w-full mt-6 grid grid-cols-2 md:grid-cols-3 gap-4">
+            <mat-button-toggle-group formControlName="side" aria-label="Side" class="flex-auto pr-2">
+                <mat-button-toggle class="flex-auto w-full" [value]="'BUY'">
+                    Buy
+                </mat-button-toggle>
+                <mat-button-toggle class="flex-auto w-full" [value]="'SELL'">
+                    Sell
+                </mat-button-toggle>
+            </mat-button-toggle-group>
+        
+            <mat-form-field
+            class="flex-auto">
+                <mat-label>Trade type</mat-label>
+                <mat-select formControlName="trade_type" matSuffix>
+                    <mat-option [value]="'STK'">Stock</mat-option>
+                    <mat-option [value]="'OPT'">Option</mat-option>
+                    <mat-option [value]="'CASH'">Cash</mat-option>
+                </mat-select>
+            </mat-form-field>
+        
+            <mat-form-field
+            class="flex-auto">
+                <mat-label>Order type</mat-label>
+                <mat-select formControlName="order_type" matSuffix>
+                    <mat-option [value]="'LMT'">Limit</mat-option>
+                    <mat-option [value]="'MKT'">Market</mat-option>
+                    <mat-option [value]="'STP'">Stop</mat-option>
+                    <mat-option [value]="'STP_LIMIT'">Stop Limit</mat-option>
+                </mat-select>
+            </mat-form-field>
+    
+            <mat-form-field
+            class="flex-auto">
+            <mat-label>Ticker</mat-label>
+            <input formControlName="ticker" matInput [placeholder]="'Ticker'" />
+            </mat-form-field>
+        
+            <mat-form-field
+            class="flex-auto">
+            <mat-label>Amount</mat-label>
+            <input formControlName="amount" matInput type="number" [placeholder]="100" />
+            </mat-form-field>
+            
+            <mat-form-field
+            class="flex-auto">
+            <mat-label>Price</mat-label>
+            <input formControlName="price" class="text-right" type="number" placeholder="1.00" matInput/>
+            <span matPrefix>$</span>
+            </mat-form-field>
+        </div>
+        <div class="flex">
+            <mat-form-field
+            class="fuse-mat-textarea flex-auto">
+            <mat-label>Comment</mat-label>
+            <textarea formControlName="comment" matInput matTextareaAutosize></textarea>
+            </mat-form-field>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-4 sm:mt-6">
+            <div class="-ml-2">
+                <!-- Attach file -->
+                <button mat-icon-button>
+                    <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:paper-clip'"></mat-icon>
+                </button>
+            </div>
+
+            <div class="flex items-center mt-4 sm:mt-0">
+                <button mat-raised-button mat-dialog-close [disabled]="!tradeForm.valid" type="submit" data-action="save">Save</button>
+            </div>
+        </div>
+    </form>
+</div>

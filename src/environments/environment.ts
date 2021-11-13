@@ -6,6 +6,7 @@ export const environment = {
     production: false,
     apiUrl: 'https://tranquil-bastion-48091.herokuapp.com/https://trading-planner-eqm52ybela-uc.a.run.app'
 };
+// apiUrl: 'http://localhost:3000'
 
 /*
  * For easier debugging in development mode, you can import the following file

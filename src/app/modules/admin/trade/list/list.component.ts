@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { TradeDetailsComponent } from '../details/details.component';
 import { TradeService } from '../trade.service';
 import { ITrade } from '../trade.types';
 
@@ -34,6 +35,7 @@ export class TradeListComponent implements OnInit, OnDestroy
      * Constructor
      */
     constructor(
+        private _matDialog: MatDialog,
         private _tradeService: TradeService
     )
     {
@@ -101,4 +103,18 @@ export class TradeListComponent implements OnInit, OnDestroy
      {
          return item.id || index;
      }
+
+    /**
+     * Open the new trade dialog
+     */
+    openNewTradeDialog(): void
+    {
+        this._matDialog.open(TradeDetailsComponent, {
+            autoFocus: false
+        });
+        this._matDialog.afterAllClosed.subscribe(()=>{
+            console.log('Get trades after close dialog');
+            this._tradeService.getTrades();
+        });
+    }
 }

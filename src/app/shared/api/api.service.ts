@@ -14,4 +14,8 @@ export class ApiService {
   getTradeApi(): string{
     return `${this._baseUrl}/trades`;
   }
+
+  createTradeApi(): string{
+    return `${this._baseUrl}/trades`;
+  }
 }

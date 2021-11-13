@@ -95,7 +95,7 @@ export class TradeService
      */
     createTrade(trade: ITrade): Observable<ITrade>
     {
-        return this._httpClient.post<ITrade>('api/apps/trades', {trade}).pipe(
+        return this._httpClient.post<ITrade>(this._apiService.createTradeApi(), trade).pipe(
             switchMap(response => this.getTrades().pipe(
                 switchMap(() => this.getTradeById(response.id).pipe(
                     map(() => response)
