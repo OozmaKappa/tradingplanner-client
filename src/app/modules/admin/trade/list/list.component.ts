@@ -21,7 +21,7 @@ export class TradeListComponent implements OnInit, OnDestroy
     trades: ITrade[];
 
     tradesDataSource: MatTableDataSource<any> = new MatTableDataSource();
-    tradesTableColumns: string[] = ['ticker', 'createdAt', 'price', 'amount', 'status'];
+    tradesTableColumns: string[] = ['ticker', 'updatedAt', 'price', 'amount', 'status'];
 
     drawerMode: 'over' | 'side' = 'side';
     drawerOpened: boolean = true;
