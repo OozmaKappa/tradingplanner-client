@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ApexOptions } from 'ng-apexcharts';
+import { StrategyDetailsComponent } from './details/details.component';
 
 @Component({
   selector: 'app-strategy',
@@ -8,11 +10,28 @@ import { ApexOptions } from 'ng-apexcharts';
 export class StrategyComponent implements OnInit {
   chartImpressions: ApexOptions;
 
-  constructor() { }
+  constructor(
+    private _matDialog: MatDialog
+    ) {
+  }
 
   ngOnInit(): void {
     this. _prepareChartData1();
   }
+
+  /**
+   * Open the new strategy dialog
+   */
+   openNewStrategyDialog(): void
+   {
+       this._matDialog.open(StrategyDetailsComponent, {
+           autoFocus: false
+       });
+       // this._matDialog.afterAllClosed.subscribe(()=>{
+       //     console.log('Get trades after close dialog');
+       //     this._tradeService.getTrades();
+       // });
+   }
 
   private _prepareChartData1(): void{
     this.chartImpressions = {

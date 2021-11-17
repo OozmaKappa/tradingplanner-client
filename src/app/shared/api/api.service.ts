@@ -7,15 +7,27 @@ import { environment } from 'environments/environment';
 export class ApiService {
   private _baseUrl: string;
 
-  constructor() {
-    this._baseUrl = `${environment.apiUrl}`;
+  constructor(private _entity: string) {
+    this._baseUrl = `${environment.apiUrl}/${this._entity}`;
   }
 
-  getTradeApi(): string{
-    return `${this._baseUrl}/trades`;
+  createApi(): string {
+    return `${this._baseUrl}`;
   }
 
-  createTradeApi(): string{
-    return `${this._baseUrl}/trades`;
+  getAllApi(): string {
+    return `${this._baseUrl}`;
+  }
+
+  getByIdApi(id: string): string {
+    return `${this._baseUrl}/${id}`;
+  }
+
+  updateApi(id: string): string {
+    return `${this._baseUrl}/${id}`;
+  }
+
+  deleteApi(id: string): string {
+    return `${this._baseUrl}/${id}`;
   }
 }
