@@ -49,5 +49,5 @@ export interface ITrade
     expiresAt?: Date;
     pnl?: number;
     comment?: string;
-    strategy?: string;
+    strategy?: string | any;
 }

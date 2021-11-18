@@ -9,7 +9,11 @@
     "vue",
     "markdown"
   ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
-  }
+  },
+  "editor.detectIndentation": false
 }

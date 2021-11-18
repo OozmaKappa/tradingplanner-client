@@ -7,13 +7,12 @@ import { ITrade } from 'app/modules/admin/trade/trade.types';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-    selector       : 'trades-details',
-    templateUrl    : './details.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'trades-details',
+    templateUrl: './details.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TradeDetailsComponent implements OnInit, OnDestroy
-{
+export class TradeDetailsComponent implements OnInit, OnDestroy {
     tradeForm: FormGroup;
     trade$: Observable<ITrade>;
     tradeChanged: Subject<ITrade> = new Subject<ITrade>();
@@ -24,12 +23,12 @@ export class TradeDetailsComponent implements OnInit, OnDestroy
      * Constructor
      */
     constructor(
+        @Inject(MAT_DIALOG_DATA) public data: { strategyId: string },
         private _changeDetectorRef: ChangeDetectorRef,
         private _tradeService: TradeService,
         private _formBuilder: FormBuilder,
         private _matDialogRef: MatDialogRef<TradeDetailsComponent>
-    )
-    {
+    ) {
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -39,17 +38,16 @@ export class TradeDetailsComponent implements OnInit, OnDestroy
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
         // Create the form
         this.tradeForm = this._formBuilder.group({
-            side        : ['BUY', [Validators.required]],
-            trade_type  : ['STK', [Validators.required]],
-            ticker      : ['', [Validators.required]],
-            amount      : ['', [Validators.required]],
-            price       : ['', [Validators.required]],
-            order_type  : ['LMT', [Validators.required]],
-            comment     : ['']
+            side: ['BUY', [Validators.required]],
+            trade_type: ['STK', [Validators.required]],
+            ticker: ['', [Validators.required]],
+            amount: ['', [Validators.required]],
+            price: ['', [Validators.required]],
+            order_type: ['LMT', [Validators.required]],
+            comment: ['']
         });
 
         // Subscribe to trade updates
@@ -67,8 +65,7 @@ export class TradeDetailsComponent implements OnInit, OnDestroy
     /**
      * On destroy
      */
-    ngOnDestroy(): void
-    {
+    ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
@@ -83,8 +80,7 @@ export class TradeDetailsComponent implements OnInit, OnDestroy
      *
      * @param trade
      */
-    createTrade(trade: ITrade): void
-    {
+    createTrade(trade: ITrade): void {
         this._tradeService.createTrade(trade).pipe(
             map(() => {
                 // Get the trade
@@ -94,13 +90,14 @@ export class TradeDetailsComponent implements OnInit, OnDestroy
 
     onSubmit(form): void {
         const newTrade: ITrade = {
-            ticker      : form.value.ticker,
-            price       : form.value.price,
-            type        : form.value.trade_type,
-            amount      : form.value.amount,
-            side        : form.value.side,
-            orderType   : form.value.order_type,
-            comment     : form.value.comment
+            ticker: form.value.ticker,
+            price: form.value.price,
+            type: form.value.trade_type,
+            amount: form.value.amount,
+            side: form.value.side,
+            orderType: form.value.order_type,
+            comment: form.value.comment,
+            strategy: this.data.strategyId
         };
 
         console.log(`Submit trade with form values: ${JSON.stringify(newTrade)}`);
@@ -164,8 +161,7 @@ export class TradeDetailsComponent implements OnInit, OnDestroy
      *
      * @param trade
      */
-    updateTradeDetails(trade: ITrade): void
-    {
+    updateTradeDetails(trade: ITrade): void {
         this.tradeChanged.next(trade);
     }
 
@@ -174,14 +170,12 @@ export class TradeDetailsComponent implements OnInit, OnDestroy
      *
      * @param trade
      */
-    deleteTrade(trade: ITrade): void
-    {
+    deleteTrade(trade: ITrade): void {
         this._tradeService.deleteTrade(trade)
             .subscribe((isDeleted) => {
 
                 // Return if the trade wasn't deleted...
-                if ( !isDeleted )
-                {
+                if (!isDeleted) {
                     return;
                 }
 
@@ -196,8 +190,7 @@ export class TradeDetailsComponent implements OnInit, OnDestroy
      * @param index
      * @param item
      */
-    trackByFn(index: number, item: any): any
-    {
+    trackByFn(index: number, item: any): any {
         return item.id || index;
     }
 

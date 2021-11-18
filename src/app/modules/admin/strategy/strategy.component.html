@@ -1,121 +1,119 @@
 <!-- Title and action buttons -->
 <div class="flex items-center justify-between w-full">
-    <div>
-        <h2 class="text-3xl font-semibold tracking-tight leading-8">Strategies</h2>
-        <div class="font-medium tracking-tight text-secondary">Keep track of each strategy performance</div>
-    </div>
-    <div class="flex items-center ml-6">
-        <button class="hidden sm:inline-flex ml-3" mat-flat-button [color]="'primary'"
-            (click)="openNewStrategyDialog()">
-            <mat-icon svgIcon="mat_outline:add"></mat-icon>
-            <span class="ml-2">New Strategy</span>
-        </button>
+  <div>
+    <h2 class="text-3xl font-semibold tracking-tight leading-8">Strategies</h2>
+    <div class="font-medium tracking-tight text-secondary">Keep track of each strategy performance</div>
+  </div>
+  <div class="flex items-center ml-6">
+    <button class="hidden sm:inline-flex ml-3" mat-flat-button [color]="'primary'" (click)="openNewStrategyDialog()">
+      <mat-icon svgIcon="mat_outline:add"></mat-icon>
+      <span class="ml-2">New Strategy</span>
+    </button>
 
-        <!-- Actions menu (visible on xs) -->
-        <div class="sm:hidden">
-            <button [matMenuTriggerFor]="actionsMenu" mat-icon-button>
-                <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
-            </button>
-            <mat-menu #actionsMenu="matMenu">
-                <button mat-menu-item (click)="openNewStrategyDialog()">New Strategy</button>
-            </mat-menu>
-        </div>
+    <!-- Actions menu (visible on xs) -->
+    <div class="sm:hidden">
+      <button [matMenuTriggerFor]="actionsMenu" mat-icon-button>
+        <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
+      </button>
+      <mat-menu #actionsMenu="matMenu">
+        <button mat-menu-item (click)="openNewStrategyDialog()">New Strategy</button>
+      </mat-menu>
     </div>
+  </div>
 </div>
 
 <mat-tab-group class="mt-10">
-    <mat-tab label="Buy and Hold">
-        <!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 flex-row w-full"> -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 flex-row w-full">
-            <!-- Visitors overview -->
-            <!-- Conversions -->
+  <mat-tab label="{{strategy.name}}" *ngFor="let strategy of strategies$ | async">
+    <!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 flex-row w-full"> -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 flex-row w-full">
+      <!-- Visitors overview -->
+      <!-- Conversions -->
 
-            <!-- Impressions -->
-            <div class="flex flex-col flex-auto bg-card shadow rounded-xl overflow-hidden">
-                <div class="flex items-start justify-between m-6 mb-0">
-                    <div class="text-lg font-medium tracking-tight leading-6 truncate">Strategy Performance</div>
-                    <div class="ml-2">
-                        <button class="h-6 min-h-6 px-2 rounded-full bg-hover" mat-button
-                            [matMenuTriggerFor]="impressionsMenu">
-                            <span class="font-medium text-sm text-secondary">30 days</span>
-                        </button>
-                        <mat-menu #impressionsMenu="matMenu">
-                            <button mat-menu-item>30 days</button>
-                            <button mat-menu-item>3 months</button>
-                            <button mat-menu-item>9 months</button>
-                        </mat-menu>
-                    </div>
-                </div>
-                <div class="flex flex-col lg:flex-row lg:items-center mx-6 mt-3">
-                    <div class="text-7xl font-bold tracking-tighter leading-tight">45225</div>
-                    <!-- <div class="text-7xl font-bold tracking-tighter leading-tight">{{data1.impressions.amount | number:'1.0-0'}}</div> -->
-                    <div class="flex lg:flex-col lg:ml-3">
-                        <mat-icon class="icon-size-5 text-red-500" [svgIcon]="'heroicons_solid:trending-down'">
-                        </mat-icon>
-                        <div
-                            class="flex items-center ml-1 lg:ml-0 lg:mt-0.5 text-md leading-none whitespace-nowrap text-secondary">
-                            <span class="font-medium text-red-500">4%</span>
-                            <span class="ml-1">below target</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex flex-col flex-auto h-10">
-                    <apx-chart class="flex-auto w-full h-10" [chart]="chartImpressions.chart"
-                        [colors]="chartImpressions.colors" [series]="chartImpressions.series"
-                        [stroke]="chartImpressions.stroke" [tooltip]="chartImpressions.tooltip"
-                        [xaxis]="chartImpressions.xaxis" [yaxis]="chartImpressions.yaxis"></apx-chart>
-                </div>
+      <!-- Impressions -->
+      <div class="flex flex-col flex-auto bg-card shadow rounded-xl overflow-hidden">
+        <div class="flex items-start justify-between m-6 mb-0">
+          <div class="text-lg font-medium tracking-tight leading-6 truncate">Strategy Performance</div>
+          <div class="ml-2">
+            <button class="h-6 min-h-6 px-2 rounded-full bg-hover" mat-button [matMenuTriggerFor]="impressionsMenu">
+              <span class="font-medium text-sm text-secondary">30 days</span>
+            </button>
+            <mat-menu #impressionsMenu="matMenu">
+              <button mat-menu-item>30 days</button>
+              <button mat-menu-item>3 months</button>
+              <button mat-menu-item>9 months</button>
+            </mat-menu>
+          </div>
+        </div>
+        <div class="flex flex-col lg:flex-row lg:items-center mx-6 mt-3">
+          <div class="text-7xl font-bold tracking-tighter leading-tight">45225</div>
+          <!-- <div class="text-7xl font-bold tracking-tighter leading-tight">{{data1.impressions.amount | number:'1.0-0'}}</div> -->
+          <div class="flex lg:flex-col lg:ml-3">
+            <mat-icon class="icon-size-5 text-red-500" [svgIcon]="'heroicons_solid:trending-down'">
+            </mat-icon>
+            <div class="flex items-center ml-1 lg:ml-0 lg:mt-0.5 text-md leading-none whitespace-nowrap text-secondary">
+              <span class="font-medium text-red-500">4%</span>
+              <span class="ml-1">below target</span>
             </div>
-            <div class="flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
-                <fuse-card class="flex flex-col w-full p-8 filter-info ">
-                    <div class="flex flex-row">
+          </div>
+        </div>
+        <div class="flex flex-col flex-auto h-10">
+          <apx-chart class="flex-auto w-full h-10" [chart]="chartImpressions.chart" [colors]="chartImpressions.colors"
+            [series]="chartImpressions.series" [stroke]="chartImpressions.stroke" [tooltip]="chartImpressions.tooltip"
+            [xaxis]="chartImpressions.xaxis" [yaxis]="chartImpressions.yaxis"></apx-chart>
+        </div>
+      </div>
+      <div class="flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
+        <fuse-card class="flex flex-col w-full p-8 filter-info ">
+          <div class="flex flex-row">
 
-                        <!-- <hr class="w-full border-t"> -->
-                        <div class="flex flex-col justify-between border-r w-1/3">
-                            <div class="flex items-center">
-                                <mat-icon class="icon-size-5 mr-3" [svgIcon]="'mat_outline:monetization_on'"></mat-icon>
-                                <span>Seed Capital <br />10,000$</span>
-                            </div>
-                            <div class="flex items-center mt-4">
-                                <mat-icon class="icon-size-5 mr-3" [svgIcon]="'mat_outline:verified_user'"></mat-icon>
-                                <span>Max risk per trade <br />2% = 200$</span>
-                            </div>
-                            <div class="flex items-center mt-4">
-                                <mat-icon class="icon-size-5 mr-3" [svgIcon]="'mat_solid:verified_user'"></mat-icon>
-                                <span>Max risk per strategy <br />20% = 2000$</span>
-                            </div>
-                        </div>
-                        <div class="flex flex-col w-2/3 items-start justify-between ml-2">
-                            <div class="text-lg font-medium tracking-tight leading-6 truncate">Buy and Hold</div>
-                            <div class="mt-4">
-                                Here comes description of the strategy or the content of the comment field.
-                                <br><br>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex flex-col flex-auto w-full items-center mt-6">
-                        <button class="px-6" mat-flat-button [color]="'primary'">
-                            Update Strategy
-                        </button>
-                    </div>
-                </fuse-card>
+            <!-- <hr class="w-full border-t"> -->
+            <div class="flex flex-col justify-between border-r w-1/3">
+              <div class="flex items-center">
+                <mat-icon class="icon-size-5 mr-3" [svgIcon]="'mat_outline:monetization_on'"></mat-icon>
+                <span>Seed Capital <br />{{strategy.seed}}$</span>
+              </div>
+              <div class="flex items-center mt-4">
+                <mat-icon class="icon-size-5 mr-3" [svgIcon]="'mat_outline:verified_user'"></mat-icon>
+                <span>Max risk per trade <br />{{strategy.maxTradeLoss}}% = {{(strategy.seed * strategy.maxTradeLoss) /
+                  100}}$</span>
+              </div>
+              <div class="flex items-center mt-4">
+                <mat-icon class="icon-size-5 mr-3" [svgIcon]="'mat_solid:verified_user'"></mat-icon>
+                <span>Max risk per strategy <br />{{strategy.maxLoss}}% = {{(strategy.seed * strategy.maxLoss) /
+                  100}}$</span>
+              </div>
             </div>
-        </div>
-        <!-- TradeList -->
-        <div class="grid grid-cols-1 xl:grid-cols-3 gap-8 w-full mt-8">
-            <div class="xl:col-span-6 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
-                <trade-list></trade-list>
+            <div class="flex flex-col w-2/3 items-start justify-between ml-2">
+              <div class="text-lg font-medium tracking-tight leading-6 truncate">{{strategy.name}}</div>
+              <div class="mt-4">
+                {{strategy.comment}}
+                <br><br>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              </div>
             </div>
-        </div>
-    </mat-tab>
-    <mat-tab label="Bonus Strategy"></mat-tab>
-    <mat-tab>
-        <ng-template mat-tab-label>
-            <mat-icon class="example-tab-icon">add</mat-icon>
-            New
-        </ng-template>
-    </mat-tab>
+          </div>
+          <div class="flex flex-col flex-auto w-full items-center mt-6">
+            <button class="px-6" mat-flat-button [color]="'primary'">
+              Update Strategy
+            </button>
+          </div>
+        </fuse-card>
+      </div>
+    </div>
+    <!-- TradeList -->
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-8 w-full mt-8">
+      <div class="xl:col-span-6 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
+        <trade-list strategyId="{{strategy._id}}"></trade-list>
+      </div>
+    </div>
+  </mat-tab>
+  <!-- <mat-tab label="Bonus Strategy"></mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="example-tab-icon">add</mat-icon>
+      New
+    </ng-template>
+  </mat-tab> -->
 </mat-tab-group>
