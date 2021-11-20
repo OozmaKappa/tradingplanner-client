@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ApexOptions } from 'ng-apexcharts';
 import { Observable } from 'rxjs';
@@ -15,6 +16,7 @@ import { IStrategy } from './strategy.types';
 export class StrategyComponent implements OnInit, OnDestroy {
   chartImpressions: ApexOptions;
   strategies$: Observable<IStrategy[]>;
+  selected = new FormControl(0);
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
   constructor(
@@ -52,6 +54,10 @@ export class StrategyComponent implements OnInit, OnDestroy {
     this._matDialog.open(StrategyDetailsComponent, {
       autoFocus: false
     });
+  }
+
+  calculateAmountOfPercent(base: number, percent: number): number{
+    return Math.round((base * percent) / 100);
   }
 
   private _prepareChartData1(): void {

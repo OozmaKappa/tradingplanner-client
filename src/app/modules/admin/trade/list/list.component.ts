@@ -60,6 +60,7 @@ export class TradeListComponent implements OnInit, OnDestroy {
      */
     ngOnInit(): void {
         // Request the data from the server
+        console.log('Init trade list component');
         this._tradeService.getTrades().subscribe();
         this.trades$ = this._tradeService.trades$;
         this.trades$
@@ -70,17 +71,18 @@ export class TradeListComponent implements OnInit, OnDestroy {
                 // Prepare the chart data
                 // this._prepareChartData();
                 console.log(trades);
+                if (this.strategyId) {
+                    this._tradeService.getTradesByStrategyId(this.strategyId)
+                        .pipe(takeUntil(this._unsubscribeAll))
+                        .subscribe(
+                            (strategyTrades) => {
+                                this.tradesDataSource.data = strategyTrades;
+                            }
+                        );
+                }
             });
 
-        if (this.strategyId) {
-            this._tradeService.getTradeByStrategyId(this.strategyId)
-                .pipe(takeUntil(this._unsubscribeAll))
-                .subscribe(
-                    (strategyTrades) => {
-                        this.tradesDataSource.data = strategyTrades;
-                    }
-                );
-        }
+        console.log(`strategyId: ${this.strategyId}`);
         // this.trades$.forEach((trade) => {
         //   console.log(trade);
         // });
@@ -115,10 +117,10 @@ export class TradeListComponent implements OnInit, OnDestroy {
         this._matDialog.open(TradeDetailsComponent, {
             autoFocus: false,
             data: { strategyId: this.strategyId }
-    });
-    // this._matDialog.afterAllClosed.subscribe(()=>{
-    //     console.log('Get trades after close dialog');
-    //     this._tradeService.getTrades();
-    // });
-}
+        });
+        // this._matDialog.afterAllClosed.subscribe(()=>{
+        //     console.log('Get trades after close dialog');
+        //     this._tradeService.getTrades();
+        // });
+    }
 }

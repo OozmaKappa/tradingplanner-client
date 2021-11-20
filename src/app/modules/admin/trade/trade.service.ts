@@ -92,10 +92,10 @@ export class TradeService
     /**
      * Get trade by strategyId
      */
-    getTradeByStrategyId(strategyId: string): Observable<ITrade[]>
+    getTradesByStrategyId(strategyId: string): Observable<ITrade[]>
     {
         return this._trades.pipe(
-            map(trades => trades.filter(trade =>  trade.strategy._id === strategyId))
+            map(trades => trades.filter(trade =>  trade.strategy && trade.strategy._id === strategyId))
         );
     }
 
