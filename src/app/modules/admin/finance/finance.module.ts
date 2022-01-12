@@ -7,7 +7,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSortModule } from '@angular/material/sort';
-import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { SharedModule } from 'app/shared/shared.module';
@@ -15,6 +14,7 @@ import { FinanceComponent } from 'app/modules/admin/finance/finance.component';
 import { financeRoutes } from 'app/modules/admin/finance/finance.routing';
 import { FuseCardModule } from '@fuse/components/card';
 import { TradeModule } from '../trade/trade.module';
+import { StrategyModule } from '../strategy/strategy.module';
 
 
 @NgModule({
@@ -24,7 +24,6 @@ import { TradeModule } from '../trade/trade.module';
     imports     : [
         RouterModule.forChild(financeRoutes),
         FuseCardModule,
-        MatTabsModule,
         MatButtonModule,
         MatDividerModule,
         MatIconModule,
@@ -35,7 +34,8 @@ import { TradeModule } from '../trade/trade.module';
         NgApexchartsModule,
         SharedModule,
         HttpClientModule,
-        TradeModule
+        TradeModule,
+        StrategyModule
     ]
 })
 export class FinanceModule

@@ -17,29 +17,18 @@
                         [svgIcon]="'heroicons_solid:document-report'"></mat-icon>
                     <span class="ml-2">Reports</span>
                 </button> -->
-                <button
-                    class="hidden sm:inline-flex ml-3"
-                    mat-stroked-button>
-                    <mat-icon
-                        class="icon-size-5"
-                        [svgIcon]="'heroicons_solid:cog'"></mat-icon>
+                <button class="hidden sm:inline-flex ml-3" mat-stroked-button>
+                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:cog'"></mat-icon>
                     <span class="ml-2">Settings</span>
                 </button>
-                <button
-                    class="hidden sm:inline-flex ml-3"
-                    mat-flat-button
-                    [color]="'primary'">
-                    <mat-icon
-                        class="icon-size-5"
-                        [svgIcon]="'heroicons_solid:save'"></mat-icon>
+                <button class="hidden sm:inline-flex ml-3" mat-flat-button [color]="'primary'">
+                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:save'"></mat-icon>
                     <span class="ml-2">Export</span>
                 </button>
 
                 <!-- Actions menu (visible on xs) -->
                 <div class="sm:hidden">
-                    <button
-                        [matMenuTriggerFor]="actionsMenu"
-                        mat-icon-button>
+                    <button [matMenuTriggerFor]="actionsMenu" mat-icon-button>
                         <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
                     </button>
                     <mat-menu #actionsMenu="matMenu">
@@ -56,8 +45,7 @@
                 <!-- Previous statement -->
                 <div class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded-2xl shadow overflow-hidden">
                     <div class="absolute bottom-0 right-0 w-24 h-24 -m-6">
-                        <mat-icon
-                            class="icon-size-24 opacity-25 text-green-500 dark:text-green-400"
+                        <mat-icon class="icon-size-24 opacity-25 text-green-500 dark:text-green-400"
                             [svgIcon]="'heroicons_outline:check-circle'"></mat-icon>
                     </div>
                     <div class="flex items-center">
@@ -68,52 +56,43 @@
                             </div>
                         </div>
                         <div class="ml-auto -mt-2">
-                            <button
-                                mat-icon-button
-                                [matMenuTriggerFor]="previousStatementMenu">
-                                <mat-icon
-                                    class="icon-size-5"
-                                    [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
+                            <button mat-icon-button [matMenuTriggerFor]="previousStatementMenu">
+                                <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
                             </button>
                             <mat-menu #previousStatementMenu="matMenu">
                                 <button mat-menu-item>
                                     <span class="flex items-center">
-                                        <mat-icon
-                                            class="icon-size-5 mr-3"
-                                            [svgIcon]="'heroicons_solid:credit-card'"></mat-icon>
+                                        <mat-icon class="icon-size-5 mr-3" [svgIcon]="'heroicons_solid:credit-card'">
+                                        </mat-icon>
                                         <span>View statement</span>
                                     </span>
                                 </button>
                                 <button mat-menu-item>
                                     <span class="flex items-center">
-                                        <mat-icon
-                                            class="icon-size-5 mr-3"
-                                            [svgIcon]="'heroicons_solid:cash'"></mat-icon>
+                                        <mat-icon class="icon-size-5 mr-3" [svgIcon]="'heroicons_solid:cash'">
+                                        </mat-icon>
                                         <span>Spending breakdown</span>
                                     </span>
                                 </button>
                                 <button mat-menu-item>
                                     <span class="flex items-center">
-                                        <mat-icon
-                                            class="icon-size-5 mr-3"
-                                            [svgIcon]="'heroicons_solid:receipt-tax'"></mat-icon>
+                                        <mat-icon class="icon-size-5 mr-3" [svgIcon]="'heroicons_solid:receipt-tax'">
+                                        </mat-icon>
                                         <span>Tax breakdown</span>
                                     </span>
                                 </button>
                                 <mat-divider class="my-2"></mat-divider>
                                 <button mat-menu-item>
                                     <span class="flex items-center">
-                                        <mat-icon
-                                            class="icon-size-5 mr-3"
-                                            [svgIcon]="'heroicons_solid:printer'"></mat-icon>
+                                        <mat-icon class="icon-size-5 mr-3" [svgIcon]="'heroicons_solid:printer'">
+                                        </mat-icon>
                                         <span>Print statement</span>
                                     </span>
                                 </button>
                                 <button mat-menu-item>
                                     <span class="flex items-center">
-                                        <mat-icon
-                                            class="icon-size-5 mr-3"
-                                            [svgIcon]="'heroicons_solid:mail'"></mat-icon>
+                                        <mat-icon class="icon-size-5 mr-3" [svgIcon]="'heroicons_solid:mail'">
+                                        </mat-icon>
                                         <span>Email statement</span>
                                     </span>
                                 </button>
@@ -127,75 +106,67 @@
                         </div>
                         <div class="flex flex-col mx-6 my-3">
                             <div class="text-sm font-medium leading-none text-secondary">Spent</div>
-                            <div class="mt-2 font-medium text-3xl leading-none">{{data.previousStatement.spent | currency:'USD'}}</div>
+                            <div class="mt-2 font-medium text-3xl leading-none">{{data.previousStatement.spent |
+                                currency:'USD'}}</div>
                         </div>
                         <div class="flex flex-col mx-6 my-3">
                             <div class="text-sm font-medium leading-none text-secondary">Profit</div>
-                            <div class="mt-2 font-medium text-3xl leading-none">{{data.previousStatement.minimum | currency:'USD'}}</div>
+                            <div class="mt-2 font-medium text-3xl leading-none">{{data.previousStatement.minimum |
+                                currency:'USD'}}</div>
                         </div>
                     </div>
                 </div>
                 <!-- Current statement -->
                 <div class="relative flex flex-col flex-auto p-6 pr-3 pb-3 bg-card rounded-2xl shadow overflow-hidden">
                     <div class="absolute bottom-0 right-0 w-24 h-24 -m-6">
-                        <mat-icon
-                            class="icon-size-24 opacity-25 text-red-500 dark:text-red-400"
+                        <mat-icon class="icon-size-24 opacity-25 text-red-500 dark:text-red-400"
                             [svgIcon]="'heroicons_outline:exclamation-circle'"></mat-icon>
                     </div>
                     <div class="flex items-center">
                         <div class="flex flex-col">
                             <div class="text-lg font-medium tracking-tight leading-6 truncate">Last Trade</div>
                             <div class="text-red-600 font-medium text-sm">
-                            {{data.currentStatement.date}}
+                                {{data.currentStatement.date}}
                             </div>
                         </div>
                         <div class="ml-auto -mt-2">
-                            <button
-                                mat-icon-button
-                                [matMenuTriggerFor]="currentStatementMenu">
-                                <mat-icon
-                                    class="icon-size-5"
-                                    [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
+                            <button mat-icon-button [matMenuTriggerFor]="currentStatementMenu">
+                                <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
                             </button>
                             <mat-menu #currentStatementMenu="matMenu">
                                 <button mat-menu-item>
                                     <span class="flex items-center">
-                                        <mat-icon
-                                            class="icon-size-5 mr-3"
-                                            [svgIcon]="'heroicons_solid:credit-card'"></mat-icon>
+                                        <mat-icon class="icon-size-5 mr-3" [svgIcon]="'heroicons_solid:credit-card'">
+                                        </mat-icon>
                                         <span>View statement</span>
                                     </span>
                                 </button>
                                 <button mat-menu-item>
                                     <span class="flex items-center">
-                                        <mat-icon
-                                            class="icon-size-5 mr-3"
-                                            [svgIcon]="'heroicons_solid:cash'"></mat-icon>
+                                        <mat-icon class="icon-size-5 mr-3" [svgIcon]="'heroicons_solid:cash'">
+                                        </mat-icon>
                                         <span>Spending breakdown</span>
                                     </span>
                                 </button>
                                 <button mat-menu-item>
                                     <span class="flex items-center">
-                                        <mat-icon
-                                            class="icon-size-5 mr-3"
-                                            [svgIcon]="'heroicons_solid:receipt-tax'"></mat-icon>
+                                        <mat-icon class="icon-size-5 mr-3" [svgIcon]="'heroicons_solid:receipt-tax'">
+                                        </mat-icon>
                                         <span>Tax breakdown</span>
                                     </span>
                                 </button>
                                 <mat-divider class="my-2"></mat-divider>
                                 <button mat-menu-item>
                                     <span class="flex items-center">
-                                        <mat-icon
-                                            class="icon-size-5 mr-3"
-                                            [svgIcon]="'heroicons_solid:printer'"></mat-icon>
+                                        <mat-icon class="icon-size-5 mr-3" [svgIcon]="'heroicons_solid:printer'">
+                                        </mat-icon>
                                         <span>Print statement</span>
                                     </span>
                                 </button>
                                 <button mat-menu-item>
                                     <span class="flex items-center">
-                                        <mat-icon
-                                            class="icon-size-5 mr-3"
-                                            [svgIcon]="'heroicons_solid:mail'"></mat-icon>
+                                        <mat-icon class="icon-size-5 mr-3" [svgIcon]="'heroicons_solid:mail'">
+                                        </mat-icon>
                                         <span>Email statement</span>
                                     </span>
                                 </button>
@@ -209,11 +180,13 @@
                         </div>
                         <div class="flex flex-col mx-6 my-3">
                             <div class="text-sm font-medium leading-none text-secondary">Spent</div>
-                            <div class="mt-2 font-medium text-3xl leading-none">{{data.currentStatement.spent | currency:'USD'}}</div>
+                            <div class="mt-2 font-medium text-3xl leading-none">{{data.currentStatement.spent |
+                                currency:'USD'}}</div>
                         </div>
                         <div class="flex flex-col mx-6 my-3">
                             <div class="text-sm font-medium leading-none text-secondary">Loss</div>
-                            <div class="mt-2 font-medium text-3xl leading-none">- {{data.currentStatement.minimum | currency:'USD'}}</div>
+                            <div class="mt-2 font-medium text-3xl leading-none">- {{data.currentStatement.minimum |
+                                currency:'USD'}}</div>
                         </div>
                     </div>
                 </div>
@@ -223,13 +196,12 @@
                 <div class="flex flex-col p-6 pb-4">
                     <div class="flex items-center justify-between">
                         <div class="flex flex-col">
-                            <div class="mr-4 text-lg font-medium tracking-tight leading-6 truncate">Portfolio Performance</div>
+                            <div class="mr-4 text-lg font-medium tracking-tight leading-6 truncate">Portfolio
+                                Performance</div>
                             <div class="text-secondary font-medium">Monthly balance growth and avg. monthly income</div>
                         </div>
                         <div class="ml-2">
-                            <button
-                                class="h-6 min-h-6 px-2 rounded-full bg-hover"
-                                mat-button
+                            <button class="h-6 min-h-6 px-2 rounded-full bg-hover" mat-button
                                 [matMenuTriggerFor]="accountBalanceMenu">
                                 <span class="font-medium text-sm text-secondary">12 months</span>
                             </button>
@@ -243,137 +215,28 @@
                     </div>
                     <div class="flex items-start mt-6 mr-2">
                         <div class="flex flex-col">
-                            <div class="font-semibold text-3xl md:text-5xl tracking-tighter">{{data.accountBalance.growRate}}%</div>
+                            <div class="font-semibold text-3xl md:text-5xl tracking-tighter">
+                                {{data.accountBalance.growRate}}%</div>
                             <div class="font-medium text-sm text-secondary leading-none">$ 12,310.00</div>
                         </div>
                         <div class="flex flex-col ml-8 md:ml-16">
-                            <div class="font-semibold text-3xl md:text-5xl tracking-tighter">{{data.accountBalance.ami | currency:'USD'}}</div>
+                            <div class="font-semibold text-3xl md:text-5xl tracking-tighter">{{data.accountBalance.ami |
+                                currency:'USD'}}</div>
                             <!-- <div class="font-medium text-sm text-secondary leading-none">Average Monthly Income</div> -->
                         </div>
                     </div>
                 </div>
                 <div class="flex flex-col flex-auto">
-                    <apx-chart
-                        class="flex-auto w-full h-full"
-                        [chart]="accountBalanceOptions.chart"
-                        [colors]="accountBalanceOptions.colors"
-                        [fill]="accountBalanceOptions.fill"
-                        [series]="accountBalanceOptions.series"
-                        [stroke]="accountBalanceOptions.stroke"
-                        [tooltip]="accountBalanceOptions.tooltip"
-                        [xaxis]="accountBalanceOptions.xaxis"></apx-chart>
+                    <apx-chart class="flex-auto w-full h-full" [chart]="accountBalanceOptions.chart"
+                        [colors]="accountBalanceOptions.colors" [fill]="accountBalanceOptions.fill"
+                        [series]="accountBalanceOptions.series" [stroke]="accountBalanceOptions.stroke"
+                        [tooltip]="accountBalanceOptions.tooltip" [xaxis]="accountBalanceOptions.xaxis"></apx-chart>
                 </div>
             </div>
 
         </div>
-        <mat-tab-group class="mt-10">
-            <mat-tab label="Buy and Hold">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 flex-row w-full">
-                    <!-- Visitors overview -->
-                    <!-- Conversions -->
 
-                    <!-- Impressions -->
-                    <div class="flex flex-col flex-auto bg-card shadow rounded-xl overflow-hidden">
-                        <div class="flex items-start justify-between m-6 mb-0">
-                            <div class="text-lg font-medium tracking-tight leading-6 truncate">Strategy Performance</div>
-                            <div class="ml-2">
-                                <button
-                                    class="h-6 min-h-6 px-2 rounded-full bg-hover"
-                                    mat-button
-                                    [matMenuTriggerFor]="impressionsMenu">
-                                    <span class="font-medium text-sm text-secondary">30 days</span>
-                                </button>
-                                <mat-menu #impressionsMenu="matMenu">
-                                    <button mat-menu-item>30 days</button>
-                                    <button mat-menu-item>3 months</button>
-                                    <button mat-menu-item>9 months</button>
-                                </mat-menu>
-                            </div>
-                        </div>
-                        <div class="flex flex-col lg:flex-row lg:items-center mx-6 mt-3">
-                            <div class="text-7xl font-bold tracking-tighter leading-tight">{{data1.impressions.amount | number:'1.0-0'}}</div>
-                            <div class="flex lg:flex-col lg:ml-3">
-                                <mat-icon
-                                    class="icon-size-5 text-red-500"
-                                    [svgIcon]="'heroicons_solid:trending-down'"></mat-icon>
-                                <div class="flex items-center ml-1 lg:ml-0 lg:mt-0.5 text-md leading-none whitespace-nowrap text-secondary">
-                                    <span class="font-medium text-red-500">4%</span>
-                                    <span class="ml-1">below target</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex flex-col flex-auto h-10">
-                            <apx-chart
-                                class="flex-auto w-full h-10"
-                                [chart]="chartImpressions.chart"
-                                [colors]="chartImpressions.colors"
-                                [series]="chartImpressions.series"
-                                [stroke]="chartImpressions.stroke"
-                                [tooltip]="chartImpressions.tooltip"
-                                [xaxis]="chartImpressions.xaxis"
-                                [yaxis]="chartImpressions.yaxis"></apx-chart>
-                        </div>
-                    </div>
-                    <div class="sm:col-span-1 lg:col-span-3 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
-                        <fuse-card class="flex flex-col w-full p-8 filter-info ">
-                            <div class="text-lg font-medium tracking-tight leading-6 truncate">Buy and Hold</div>
-                            <div class="flex items-start justify-between mb-0">
-                                <div class="mt-4">
-                                    Here comes description of the strategy  or the content of the comment field.
-                                    <br><br>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                </div>
-                            </div>
-
-                            <hr class="w-full border-t">
-                            <div class="flex flex-col">
-                                <div class="flex items-center">
-                                    <mat-icon
-                                        class="icon-size-5 mr-3"
-                                        [svgIcon]="'heroicons_solid:location-marker'"></mat-icon>
-                                    <span class="leading-none">Seed Capital: 10,000$</span>
-                                </div>
-                                <div class="flex items-center mt-4">
-                                    <mat-icon
-                                        class="icon-size-5 mr-3"
-                                        [svgIcon]="'heroicons_solid:briefcase'"></mat-icon>
-                                    <span class="leading-none">Max risk per strategy: 20% = 2000$</span>
-                                </div>
-                                <div class="flex items-center mt-4">
-                                    <mat-icon
-                                        class="icon-size-5 mr-3"
-                                        [svgIcon]="'heroicons_solid:cake'"></mat-icon>
-                                    <span class="leading-none">Max risk per trade: 2% = 200$</span>
-                                </div>
-                            </div>
-                            <div class="flex flex-col flex-auto w-full items-center">
-                                <button
-                                class="px-6"
-                                mat-flat-button
-                                [color]="'primary'">
-                                Update Strategy
-                                </button>
-                            </div>
-                        </fuse-card>
-                    </div>
-                    <!-- Visits -->
-                </div>
-            </mat-tab>
-            <mat-tab label="Bonus Strategy"></mat-tab>
-            <mat-tab>
-                <ng-template mat-tab-label>
-                    <mat-icon class="example-tab-icon">add</mat-icon>
-                    New
-                </ng-template>
-            </mat-tab>
-        </mat-tab-group>
-
-        <div class="grid grid-cols-1 xl:grid-cols-3 gap-8 w-full mt-8">
-            <!-- Recent transactions table -->
-            <div class="xl:col-span-6 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
-                <trade-list></trade-list>
-            </div>
-        </div>
+        <app-strategy class="mt-20"></app-strategy>
 
     </div>
 

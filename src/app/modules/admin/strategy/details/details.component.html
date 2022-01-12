@@ -1,0 +1,71 @@
+<div class="flex flex-col max-w-160 md:min-w-100 max-h-screen -m-6">
+    <!-- Header -->
+    <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+        <div class="text-lg font-medium">New Strategy</div>
+        <button mat-icon-button (click)="onNoClick()" [tabIndex]="-1">
+            <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
+        </button>
+    </div>
+
+    <!-- Form -->
+    <form class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto" [formGroup]="strategyForm">
+        <div class="flex">
+            <mat-form-field class="flex-auto">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" [placeholder]="'Strategy name'" />
+            </mat-form-field>
+        </div>
+        <div class="flex">
+            <mat-form-field class="flex-auto">
+                <mat-label>Seed Capital</mat-label>
+                <input class="text-right" type="number" matInput formControlName="seed" />
+                <span matPrefix>$</span>
+                <span matSuffix>.00</span>
+                <mat-hint>
+                    Max. amount of capital to invest into this strategy
+                </mat-hint>
+            </mat-form-field>
+        </div>
+        <div class="flex">
+            <mat-form-field class="flex-auto">
+                <mat-label>Maximum Strategy risk</mat-label>
+                <input class="text-right" type="number" matInput formControlName="maxLoss" />
+                <span matSuffix>%</span>
+                <mat-hint>
+                    Maximum strategy loss allowed. Percentage value relates to the amount of
+                    strategy seed capital.
+                </mat-hint>
+            </mat-form-field>
+        </div>
+        <div class="flex">
+            <mat-form-field class="flex-auto">
+                <mat-label>Maximum Trade risk</mat-label>
+                <input class="text-right" type="number" matInput formControlName="maxTradeLoss" />
+                <span matSuffix>%</span>
+                <mat-hint>
+                    Maximum trade loss allowed. Percentage value relates to the amount of
+                    strategy seed capital.
+                </mat-hint>
+            </mat-form-field>
+        </div>
+        <div class="flex">
+            <mat-form-field class="fuse-mat-textarea flex-auto">
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="comment" matTextareaAutosize></textarea>
+                <mat-hint>
+                    Specify your strategy idea. Based on which criterias are you going to
+                    make your trades? When to enter and when to exit them? What is your Plan
+                    B if market moves in "wrong" direction?
+                </mat-hint>
+            </mat-form-field>
+        </div>
+        <!-- Actions -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-4 sm:mt-6">
+            <span></span>
+            <div class="flex items-center mt-4 sm:mt-0">
+                <button mat-raised-button mat-dialog-close [disabled]="!strategyForm.valid"
+                    (click)="onSubmit(strategyForm)">Save</button>
+            </div>
+        </div>
+    </form>
+</div>

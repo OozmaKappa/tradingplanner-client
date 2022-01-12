@@ -12,14 +12,16 @@ import { ApiService } from 'app/shared/api/api.service';
 export class TradeService
 {
     // Private
+    private _apiService: ApiService;
     private _trade: BehaviorSubject<ITrade | null> = new BehaviorSubject(null);
     private _trades: BehaviorSubject<ITrade[] | null> = new BehaviorSubject(null);
-
     /**
      * Constructor
      */
-    constructor(private _httpClient: HttpClient, private _apiService: ApiService)
+    constructor(private _httpClient: HttpClient)
     {
+        this._apiService = new ApiService('trades');
+        this.getTrades().subscribe();
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -51,7 +53,7 @@ export class TradeService
      */
     getTrades(): Observable<ITrade[]>
     {
-        return this._httpClient.get<ITrade[]>(this._apiService.getTradeApi()).pipe(
+        return this._httpClient.get<ITrade[]>(this._apiService.getAllApi()).pipe(
             tap((response: ITrade[]) => {
                 this._trades.next(response);
             })
@@ -89,13 +91,23 @@ export class TradeService
     }
 
     /**
+     * Get trade by strategyId
+     */
+    getTradesByStrategyId(strategyId: string): Observable<ITrade[]>
+    {
+        return this._trades.pipe(
+            map(trades => trades.filter(trade =>  trade.strategy && trade.strategy._id === strategyId))
+        );
+    }
+
+    /**
      * Create trade
      *
      * @param trade
      */
     createTrade(trade: ITrade): Observable<ITrade>
     {
-        return this._httpClient.post<ITrade>(this._apiService.createTradeApi(), trade).pipe(
+        return this._httpClient.post<ITrade>(this._apiService.createApi(), trade).pipe(
             switchMap(response => this.getTrades().pipe(
                 switchMap(() => this.getTradeById(response.id).pipe(
                     map(() => response)

@@ -15,9 +15,7 @@ import { AnalyticsService } from '../analytics/analytics.service';
 export class FinanceComponent implements OnInit, OnDestroy
 {
     // @ViewChild('recentTransactionsTable', {read: MatSort}) recentTransactionsTableMatSort: MatSort;
-    chartImpressions: ApexOptions;
     data: any;
-    data1: any;
     accountBalanceOptions: ApexOptions;
     recentTransactionsDataSource: MatTableDataSource<any> = new MatTableDataSource();
     recentTransactionsTableColumns: string[] = ['transactionId', 'date', 'name', 'amount', 'status'];
@@ -40,17 +38,6 @@ export class FinanceComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
-        // Get the data
-        this._analyticsService.data$
-        .pipe(takeUntil(this._unsubscribeAll))
-        .subscribe((data) => {
-        console.log(data);
-            // Store the data
-            this.data1 = data;
-
-            // Prepare the chart data
-           this. _prepareChartData1();
-        });
         this._financeService.data$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((data) => {
@@ -159,42 +146,5 @@ export class FinanceComponent implements OnInit, OnDestroy
             }
         };
     }
-    private _prepareChartData1(): void{
-        this.chartImpressions = {
-            chart  : {
-                animations: {
-                    enabled: false
-                },
-                fontFamily: 'inherit',
-                foreColor : 'inherit',
-                height    : '100%',
-                type      : 'area',
-                sparkline : {
-                    enabled: true
-                }
-            },
-            colors : ['#34D399'],
-            fill   : {
-                colors : ['#34D399'],
-                opacity: 0.5
-            },
-            series : this.data1.impressions.series,
-            stroke : {
-                curve: 'smooth'
-            },
-            tooltip: {
-                followCursor: true,
-                theme       : 'dark'
-            },
-            xaxis  : {
-                type      : 'category',
-                categories: this.data1.impressions.labels
-            },
-            yaxis  : {
-                labels: {
-                    formatter: (val): string => val.toString()
-                }
-            }
-        };
-    }
+
 }

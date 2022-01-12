@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,19 +9,19 @@ import { TradeService } from '../trade.service';
 import { ITrade } from '../trade.types';
 
 @Component({
-    selector       : 'trade-list',
-    templateUrl    : './list.component.html',
-    encapsulation  : ViewEncapsulation.None,
+    selector: 'trade-list',
+    templateUrl: './list.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TradeListComponent implements OnInit, OnDestroy
-{
-    @ViewChild('recentTransactionsTable', {read: MatSort}) recentTransactionsTableMatSort: MatSort;
+export class TradeListComponent implements OnInit, OnDestroy {
+    @Input() strategyId: string;
+    @ViewChild('recentTransactionsTable', { read: MatSort }) recentTransactionsTableMatSort: MatSort;
     trades$: Observable<ITrade[]>;
     trades: ITrade[];
 
     tradesDataSource: MatTableDataSource<any> = new MatTableDataSource();
-    tradesTableColumns: string[] = ['ticker', 'updatedAt', 'price', 'amount', 'status'];
+    tradesTableColumns: string[] = ['ticker', 'updatedAt', 'price', 'amount', 'pnl', 'status'];
 
     drawerMode: 'over' | 'side' = 'side';
     drawerOpened: boolean = true;
@@ -37,8 +37,7 @@ export class TradeListComponent implements OnInit, OnDestroy
     constructor(
         private _matDialog: MatDialog,
         private _tradeService: TradeService
-    )
-    {
+    ) {
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -48,8 +47,7 @@ export class TradeListComponent implements OnInit, OnDestroy
     /**
      * Get the filter status
      */
-    get filterStatus(): string
-    {
+    get filterStatus(): string {
         return this.filter$.value;
     }
 
@@ -60,31 +58,40 @@ export class TradeListComponent implements OnInit, OnDestroy
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
         // Request the data from the server
-        this._tradeService.getTrades().subscribe();
+        // this._tradeService.getTrades().subscribe();
+        console.log('Init trade list component');
         this.trades$ = this._tradeService.trades$;
-        this._tradeService.trades$
+        this.trades$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((trades) => {
                 // Store the table data
-                this.tradesDataSource.data = trades;
 
                 // Prepare the chart data
                 // this._prepareChartData();
                 console.log(trades);
+                if (this.strategyId) {
+                    this._tradeService.getTradesByStrategyId(this.strategyId)
+                        .pipe(takeUntil(this._unsubscribeAll))
+                        .subscribe(
+                            (strategyTrades) => {
+                                this.tradesDataSource.data = strategyTrades;
+                            }
+                        );
+                }
             });
-        this.trades$.forEach((trade) => {
-            console.log(trade);
-        });
+
+        console.log(`strategyId: ${this.strategyId}`);
+        // this.trades$.forEach((trade) => {
+        //   console.log(trade);
+        // });
     }
 
     /**
      * On destroy
      */
-    ngOnDestroy(): void
-    {
+    ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
@@ -99,18 +106,17 @@ export class TradeListComponent implements OnInit, OnDestroy
      * @param index
      * @param item
      */
-     trackByFn(index: number, item: any): any
-     {
-         return item.id || index;
-     }
+    trackByFn(index: number, item: any): any {
+        return item.id || index;
+    }
 
     /**
      * Open the new trade dialog
      */
-    openNewTradeDialog(): void
-    {
+    openNewTradeDialog(): void {
         this._matDialog.open(TradeDetailsComponent, {
-            autoFocus: false
+            autoFocus: false,
+            data: { strategyId: this.strategyId }
         });
         // this._matDialog.afterAllClosed.subscribe(()=>{
         //     console.log('Get trades after close dialog');
