@@ -21,7 +21,7 @@ export class TradeListComponent implements OnInit, OnDestroy {
     trades: ITrade[];
 
     tradesDataSource: MatTableDataSource<any> = new MatTableDataSource();
-    tradesTableColumns: string[] = ['ticker', 'updatedAt', 'price', 'amount', 'status'];
+    tradesTableColumns: string[] = ['ticker', 'updatedAt', 'price', 'amount', 'pnl', 'status'];
 
     drawerMode: 'over' | 'side' = 'side';
     drawerOpened: boolean = true;
@@ -60,8 +60,8 @@ export class TradeListComponent implements OnInit, OnDestroy {
      */
     ngOnInit(): void {
         // Request the data from the server
+        // this._tradeService.getTrades().subscribe();
         console.log('Init trade list component');
-        this._tradeService.getTrades().subscribe();
         this.trades$ = this._tradeService.trades$;
         this.trades$
             .pipe(takeUntil(this._unsubscribeAll))

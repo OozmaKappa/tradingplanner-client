@@ -26,7 +26,8 @@
 <mat-tab-group class="mt-10" [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)">
     <mat-tab label="{{strategy.name}}" *ngFor="let strategy of strategies$ | async; let index = index">
         <!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 flex-row w-full"> -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 flex-row w-full" *ngIf="selected.value == index">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 flex-row w-full" *ngIf="selected.value == index" #strategyView
+            [id]="strategy._id">
             <!-- Visitors overview -->
             <!-- Conversions -->
 
@@ -60,10 +61,10 @@
                     </div>
                 </div>
                 <div class="flex flex-col flex-auto h-10">
-                    <apx-chart class="flex-auto w-full h-10" [chart]="chartImpressions.chart"
-                        [colors]="chartImpressions.colors" [series]="chartImpressions.series"
-                        [stroke]="chartImpressions.stroke" [tooltip]="chartImpressions.tooltip"
-                        [xaxis]="chartImpressions.xaxis" [yaxis]="chartImpressions.yaxis"></apx-chart>
+                    <apx-chart class="flex-auto w-full h-10" [chart]="(chart$ | async).chart"
+                        [colors]="(chart$ | async).colors" [series]="(chart$ | async).series"
+                        [stroke]="(chart$ | async).stroke" [tooltip]="(chart$ | async).tooltip"
+                        [xaxis]="(chart$ | async).xaxis" [yaxis]="(chart$ | async).yaxis"></apx-chart>
                 </div>
             </div>
             <div class="flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">

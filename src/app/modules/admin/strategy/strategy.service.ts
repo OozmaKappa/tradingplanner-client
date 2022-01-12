@@ -120,4 +120,14 @@ export class StrategyService {
           })
       );
   }
+
+  /**
+   * Get strategy PnL
+   *
+   * @param strategyId
+   */
+  getPnL(strategyId: string): Observable<boolean>
+  {
+      return this._httpClient.get<boolean>(this._apiService.strategyPnL(strategyId));
+  }
 }

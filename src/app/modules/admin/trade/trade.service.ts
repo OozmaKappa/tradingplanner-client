@@ -21,6 +21,7 @@ export class TradeService
     constructor(private _httpClient: HttpClient)
     {
         this._apiService = new ApiService('trades');
+        this.getTrades().subscribe();
     }
 
     // -----------------------------------------------------------------------------------------------------
