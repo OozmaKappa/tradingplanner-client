@@ -48,15 +48,20 @@
                     </div>
                 </div>
                 <div class="flex flex-col lg:flex-row lg:items-center mx-6 mt-3">
-                    <div class="text-7xl font-bold tracking-tighter leading-tight">45225</div>
+                    <div class="text-7xl font-bold tracking-tighter leading-tight">{{getPnL()}}</div>
                     <!-- <div class="text-7xl font-bold tracking-tighter leading-tight">{{data1.impressions.amount | number:'1.0-0'}}</div> -->
                     <div class="flex lg:flex-col lg:ml-3">
-                        <mat-icon class="icon-size-5 text-red-500" [svgIcon]="'heroicons_solid:trending-down'">
+                        <mat-icon *ngIf="getPnLPercentage() < 0" class="icon-size-5 text-red-500"
+                            [svgIcon]="'heroicons_solid:trending-down'">
+                        </mat-icon>
+                        <mat-icon *ngIf="getPnLPercentage() > 0" class="icon-size-5 text-green-500"
+                            [svgIcon]="'heroicons_solid:trending-up'">
                         </mat-icon>
                         <div
                             class="flex items-center ml-1 lg:ml-0 lg:mt-0.5 text-md leading-none whitespace-nowrap text-secondary">
-                            <span class="font-medium text-red-500">4%</span>
-                            <span class="ml-1">below target</span>
+                            <span class="font-medium"
+                                [ngClass]="getPnLPercentage() > 0 ? 'text-green-500' : 'text-red-500'">{{getPnLPercentage()}}%</span>
+                            <!-- <span class="ml-1">below target</span> -->
                         </div>
                     </div>
                 </div>

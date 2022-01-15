@@ -96,7 +96,7 @@ export class TradeService
     getTradesByStrategyId(strategyId: string): Observable<ITrade[]>
     {
         return this._trades.pipe(
-            map(trades => trades.filter(trade =>  trade.strategy && trade.strategy._id === strategyId))
+            map(trades => trades.filter(trade =>  trade.strategy === strategyId))
         );
     }
 
@@ -158,4 +158,14 @@ export class TradeService
             })
         );
     }
+
+    // /**
+    //  * Restructure trade list - assign closing trades to the open ones
+    //  */
+    // combineRelatedTrades(strategyTrades: ITrade[]): ITrade[]{
+    //     //TODO: extract closing trades and assign them to the attribute closedBy of the corresponding closed trades
+
+
+    //     return strategyTrades;
+    // }
 }

@@ -21,7 +21,7 @@ export class TradeListComponent implements OnInit, OnDestroy {
     trades: ITrade[];
 
     tradesDataSource: MatTableDataSource<any> = new MatTableDataSource();
-    tradesTableColumns: string[] = ['ticker', 'updatedAt', 'price', 'amount', 'pnl', 'status'];
+    tradesTableColumns: string[] = ['ticker', 'updatedAt', 'side', 'price', 'amount', 'pnl', 'status'];
 
     drawerMode: 'over' | 'side' = 'side';
     drawerOpened: boolean = true;
@@ -73,10 +73,11 @@ export class TradeListComponent implements OnInit, OnDestroy {
                 console.log(trades);
                 if (this.strategyId) {
                     this._tradeService.getTradesByStrategyId(this.strategyId)
-                        .pipe(takeUntil(this._unsubscribeAll))
-                        .subscribe(
-                            (strategyTrades) => {
-                                this.tradesDataSource.data = strategyTrades;
+                    .pipe(takeUntil(this._unsubscribeAll))
+                    .subscribe(
+                        (strategyTrades) => {
+                            this.tradesDataSource.data = strategyTrades;
+                            console.log(`strategyTrades: ${strategyTrades}`);
                             }
                         );
                 }
