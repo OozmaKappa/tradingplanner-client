@@ -13,6 +13,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { TradeDetailsComponent } from './details/details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { TradeCardComponent } from './card/card.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 const tradeRoutes: Route[] = [
   {
@@ -28,7 +31,7 @@ const tradeRoutes: Route[] = [
 ];
 
 @NgModule({
-  declarations: [TradeComponent, TradeListComponent, TradeDetailsComponent],
+  declarations: [TradeComponent, TradeListComponent, TradeDetailsComponent, TradeCardComponent],
   imports: [
     FormsModule,
     ReactiveFormsModule,
@@ -36,12 +39,14 @@ const tradeRoutes: Route[] = [
     MatButtonModule,
     MatButtonToggleModule,
     MatDialogModule,
+    MatDividerModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatMenuModule,
     MatSelectModule,
     MatTableModule,
     CommonModule],
-  exports: [TradeListComponent]
+  exports: [TradeListComponent, TradeCardComponent]
 })
 export class TradeModule {}
