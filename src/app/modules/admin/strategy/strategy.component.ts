@@ -2,6 +2,7 @@ import { AfterViewChecked, Component, ElementRef, OnDestroy, OnInit, QueryList, 
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTab } from '@angular/material/tabs';
+import { UtilsService } from 'app/shared/utils.service';
 import { cloneDeep } from 'lodash';
 import { ApexAxisChartSeries, ApexOptions } from 'ng-apexcharts';
 import { Observable, of } from 'rxjs';
@@ -80,7 +81,8 @@ export class StrategyComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     constructor(
         private _matDialog: MatDialog,
-        private _strategyService: StrategyService
+        private _strategyService: StrategyService,
+        private _utils: UtilsService
     ) { }
 
     ngOnInit(): void {
@@ -151,7 +153,7 @@ export class StrategyComponent implements OnInit, AfterViewChecked, OnDestroy {
     getPnLPercentage(): number{
         const firstPnL = this.getPnL(0);
         const lastPnL = this.getPnL();
-        return firstPnL !== 0 ? Math.round(((firstPnL - lastPnL)/firstPnL)*100) : 100;
+        return firstPnL !== 0 ? this._utils.calculateRelativeDevelopment(firstPnL, lastPnL) : 100;
         // return this.pnlData.unrealised[lastKey];
     }
 

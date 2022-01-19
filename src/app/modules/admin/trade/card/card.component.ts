@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UtilsService } from 'app/shared/utils.service';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TradeService } from '../trade.service';
@@ -15,7 +16,7 @@ export class TradeCardComponent implements OnInit {
 
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
-    constructor(private _tradeService: TradeService) { }
+    constructor(private _tradeService: TradeService, private _utils: UtilsService) { }
 
     ngOnInit(): void {
         console.log('Init trade card');
@@ -32,4 +33,9 @@ export class TradeCardComponent implements OnInit {
             });
     }
 
+    calculateRelativeDevelopment(trade: ITrade): number{
+        const investment = trade.amount * trade.price;
+        const value = investment + trade.pnl;
+        return this._utils.calculateRelativeDevelopment(investment, value);
+    }
 }

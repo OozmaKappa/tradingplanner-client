@@ -18,35 +18,36 @@ import { TradeCardComponent } from './card/card.component';
 import { MatDividerModule } from '@angular/material/divider';
 
 const tradeRoutes: Route[] = [
-  {
-    path: '',
-    component: TradeComponent,
-    outlet: 'trade_overview'
-  },
-  {
-    path: '',
-    component: TradeListComponent,
-    outlet: 'trade_list'
-  }
+    {
+        path: '',
+        component: TradeComponent,
+        outlet: 'trade_overview'
+    },
+    {
+        path: '',
+        component: TradeListComponent,
+        outlet: 'trade_list'
+    }
 ];
 
 @NgModule({
-  declarations: [TradeComponent, TradeListComponent, TradeDetailsComponent, TradeCardComponent],
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule.forChild(tradeRoutes),
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatMenuModule,
-    MatSelectModule,
-    MatTableModule,
-    CommonModule],
-  exports: [TradeListComponent, TradeCardComponent]
+    declarations: [TradeComponent, TradeListComponent, TradeDetailsComponent, TradeCardComponent],
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule.forChild(tradeRoutes),
+        MatButtonModule,
+        MatButtonToggleModule,
+        MatDialogModule,
+        MatDividerModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatMenuModule,
+        MatSelectModule,
+        MatTableModule,
+        CommonModule
+    ],
+    exports: [TradeListComponent, TradeCardComponent]
 })
-export class TradeModule {}
+export class TradeModule { }
