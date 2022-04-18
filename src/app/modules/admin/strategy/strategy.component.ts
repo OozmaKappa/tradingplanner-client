@@ -55,10 +55,10 @@ export class StrategyComponent implements OnInit, AfterViewChecked, OnDestroy {
         tooltip: {
             followCursor: true,
             theme: 'dark',
-            x           : {
+            x: {
                 format: 'MMM dd, yyyy'
             },
-            y           : {
+            y: {
                 formatter: (value: number): string => `${value}`
             }
         },
@@ -105,10 +105,11 @@ export class StrategyComponent implements OnInit, AfterViewChecked, OnDestroy {
         //         console.log(`Strategies: ${strategies}`);
         //     });
         this._strategyService.strategies$.forEach((strategies) => {
-            console.log(`OnInit strategies$.forEach ${strategies}` );
-            this._prepareChartData(strategies[0].id);
-            // console.log(strategy);
-            this.chart$ = of(this.initialChart);
+            if (strategies) {
+                console.log(`OnInit strategies$.forEach ${strategies}`);
+                this._prepareChartData(strategies[0].id);
+                this.chart$ = of(this.initialChart);
+            }
         });
     }
 
@@ -141,16 +142,16 @@ export class StrategyComponent implements OnInit, AfterViewChecked, OnDestroy {
         return Math.round((base * percent) / 100);
     }
 
-    getPnL(index?: number): number{
-        if (this.pnlData === undefined) {
+    getPnL(index?: number): number {
+        if (!this.pnlData) {
             return 0;
         }
         const keys = Object.keys(this.pnlData.unrealised);
-        index = isNaN(index) ? keys.length -1 : index;
+        index = isNaN(index) ? keys.length - 1 : index;
         return this.pnlData.unrealised[keys[index]];
     }
 
-    getPnLPercentage(): number{
+    getPnLPercentage(): number {
         const firstPnL = this.getPnL(0);
         const lastPnL = this.getPnL();
         return firstPnL !== 0 ? this._utils.calculateRelativeDevelopment(firstPnL, lastPnL) : 100;
@@ -168,12 +169,14 @@ export class StrategyComponent implements OnInit, AfterViewChecked, OnDestroy {
         this._strategyService.getPnL(strategyId)
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((pnlData: any) => {
-                this.pnlData = pnlData;
-                this._setChartData(pnlData.realised, pnlData.unrealised);
+                if (pnlData) {
+                    this.pnlData = pnlData;
+                    this._setChartData(pnlData.realised, pnlData.unrealised);
+                }
             });
     }
 
-    private _setChartData(realised: { [key: string]: number}, unrealised: { [key: string]: number}): void {
+    private _setChartData(realised: { [key: string]: number }, unrealised: { [key: string]: number }): void {
         // const chart = cloneDeep(this.initialChart);
         // realised.forEach(realValue, index){
         //     this.initialChart.xaxis.categories = Object.keys(realised);

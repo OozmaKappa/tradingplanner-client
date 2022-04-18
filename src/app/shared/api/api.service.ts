@@ -34,6 +34,18 @@ export class ApiService {
   }
 
   strategyPnL(id: string): string {
-    return `${this._baseUrl}/trades/strategy-pnl/${id}`;
+    return `${this._entityUrl}/${id}/pnl`;
+  }
+
+  register(): string {
+      return `${this._entityUrl}/register`;
+  }
+
+  signIn(): string {
+      return `${this._entityUrl}/sign-in`;
+  }
+  
+  refreshToken(): string {
+      return `${this._entityUrl}/refresh-access-token`;
   }
 }

@@ -68,8 +68,6 @@ export class TradeService
         return this._trades.pipe(
             take(1),
             map((trades) => {
-
-                // Find within the folders and files
                 const trade = trades.find(value => value.id === id) || null;
 
                 // Update the trade
@@ -96,7 +94,7 @@ export class TradeService
     getTradesByStrategyId(strategyId: string): Observable<ITrade[]>
     {
         return this._trades.pipe(
-            map(trades => trades.filter(trade =>  trade.strategy === strategyId))
+            map(trades => trades.filter(trade => trade && trade.strategy === strategyId))
         );
     }
 

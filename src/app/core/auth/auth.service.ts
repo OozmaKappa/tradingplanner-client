@@ -4,11 +4,13 @@ import { Observable, of, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { AuthUtils } from 'app/core/auth/auth.utils';
 import { UserService } from 'app/core/user/user.service';
+import { ApiService } from 'app/shared/api/api.service';
 
 @Injectable()
 export class AuthService
 {
     private _authenticated: boolean = false;
+    private _apiService: ApiService;
 
     /**
      * Constructor
@@ -18,6 +20,7 @@ export class AuthService
         private _userService: UserService
     )
     {
+        this._apiService = new ApiService('auth');
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -74,7 +77,7 @@ export class AuthService
             return throwError('User is already logged in.');
         }
 
-        return this._httpClient.post('api/auth/sign-in', credentials).pipe(
+        return this._httpClient.post(this._apiService.signIn(), credentials).pipe(
             switchMap((response: any) => {
 
                 // Store the access token in the local storage
@@ -98,7 +101,7 @@ export class AuthService
     signInUsingToken(): Observable<any>
     {
         // Renew token
-        return this._httpClient.post('api/auth/refresh-access-token', {
+        return this._httpClient.post(this._apiService.refreshToken(), {
             accessToken: this.accessToken
         }).pipe(
             catchError(() =>
@@ -145,7 +148,7 @@ export class AuthService
      */
     signUp(user: { name: string; email: string; password: string; company: string }): Observable<any>
     {
-        return this._httpClient.post('api/auth/sign-up', user);
+        return this._httpClient.post(this._apiService.register(), user);
     }
 
     /**
