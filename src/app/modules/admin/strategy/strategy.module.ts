@@ -12,7 +12,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { StrategyDetailsComponent } from './details/details.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -44,7 +43,7 @@ const strategyRoutes: Route[] = [
     MatTableModule,
     NgApexchartsModule,
     ReactiveFormsModule,
-    TradeModule
+    TradeModule,
   ],
   exports: [
     StrategyComponent

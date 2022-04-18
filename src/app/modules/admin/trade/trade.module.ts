@@ -13,35 +13,41 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { TradeDetailsComponent } from './details/details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { TradeCardComponent } from './card/card.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 const tradeRoutes: Route[] = [
-  {
-    path: '',
-    component: TradeComponent,
-    outlet: 'trade_overview'
-  },
-  {
-    path: '',
-    component: TradeListComponent,
-    outlet: 'trade_list'
-  }
+    {
+        path: '',
+        component: TradeComponent,
+        outlet: 'trade_overview'
+    },
+    {
+        path: '',
+        component: TradeListComponent,
+        outlet: 'trade_list'
+    }
 ];
 
 @NgModule({
-  declarations: [TradeComponent, TradeListComponent, TradeDetailsComponent],
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule.forChild(tradeRoutes),
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatSelectModule,
-    MatTableModule,
-    CommonModule],
-  exports: [TradeListComponent]
+    declarations: [TradeComponent, TradeListComponent, TradeDetailsComponent, TradeCardComponent],
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule.forChild(tradeRoutes),
+        MatButtonModule,
+        MatButtonToggleModule,
+        MatDialogModule,
+        MatDividerModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatMenuModule,
+        MatSelectModule,
+        MatTableModule,
+        CommonModule
+    ],
+    exports: [TradeListComponent, TradeCardComponent]
 })
-export class TradeModule {}
+export class TradeModule { }

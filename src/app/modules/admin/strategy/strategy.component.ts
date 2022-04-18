@@ -2,6 +2,7 @@ import { AfterViewChecked, Component, ElementRef, OnDestroy, OnInit, QueryList, 
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTab } from '@angular/material/tabs';
+import { UtilsService } from 'app/shared/utils.service';
 import { cloneDeep } from 'lodash';
 import { ApexAxisChartSeries, ApexOptions } from 'ng-apexcharts';
 import { Observable, of } from 'rxjs';
@@ -74,12 +75,14 @@ export class StrategyComponent implements OnInit, AfterViewChecked, OnDestroy {
     strategies$: Observable<IStrategy[]>;
     selected = new FormControl(0);
     currentStrategyId: string;
+    pnlData;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
 
     constructor(
         private _matDialog: MatDialog,
-        private _strategyService: StrategyService
+        private _strategyService: StrategyService,
+        private _utils: UtilsService
     ) { }
 
     ngOnInit(): void {
@@ -112,7 +115,7 @@ export class StrategyComponent implements OnInit, AfterViewChecked, OnDestroy {
     ngAfterViewChecked(): void {
         const shown = this.tabs.find((tab: unknown | ElementRef) => !!tab);
         if (shown && (shown.nativeElement as HTMLDivElement).id) {
-            console.log('Tab shown is ' + (shown.nativeElement as HTMLDivElement).id);
+            // console.log('Tab shown is ' + (shown.nativeElement as HTMLDivElement).id);
             setTimeout(() => {
                 this._prepareChartData((shown.nativeElement as HTMLDivElement).id);
             }, 0);
@@ -138,6 +141,22 @@ export class StrategyComponent implements OnInit, AfterViewChecked, OnDestroy {
         return Math.round((base * percent) / 100);
     }
 
+    getPnL(index?: number): number{
+        if (this.pnlData === undefined) {
+            return 0;
+        }
+        const keys = Object.keys(this.pnlData.unrealised);
+        index = isNaN(index) ? keys.length -1 : index;
+        return this.pnlData.unrealised[keys[index]];
+    }
+
+    getPnLPercentage(): number{
+        const firstPnL = this.getPnL(0);
+        const lastPnL = this.getPnL();
+        return firstPnL !== 0 ? this._utils.calculateRelativeDevelopment(firstPnL, lastPnL) : 100;
+        // return this.pnlData.unrealised[lastKey];
+    }
+
     private _prepareChartData(strategyId: string): void {
         if (!strategyId || this.currentStrategyId === strategyId) {
             return;
@@ -145,10 +164,11 @@ export class StrategyComponent implements OnInit, AfterViewChecked, OnDestroy {
         this.currentStrategyId = strategyId;
         console.log('Get PnL and create chart');
         this.initialChart.series = [];
+        delete this.pnlData;
         this._strategyService.getPnL(strategyId)
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((pnlData: any) => {
-                console.log(`P&L Data: ${JSON.stringify(pnlData)}`);
+                this.pnlData = pnlData;
                 this._setChartData(pnlData.realised, pnlData.unrealised);
             });
     }
@@ -181,20 +201,5 @@ export class StrategyComponent implements OnInit, AfterViewChecked, OnDestroy {
             name: 'Unrealised Profit',
             data: unrealValues
         }];
-        // this.initialChart.series = [{
-        //     name: 'Realised Profit',
-        //     data: realValues.map((num, i) => num >= 0 || realValues[i - 1] >= 0 || realValues[i + 1] >= 0 ? num : NaN)
-        // }, {
-        //     name: 'Realised Loss',
-        //     data: realValues.map((num, i) => num < 0 || realValues[i - 1] < 0 ? num : NaN)
-        // }, {
-        //     name: 'Unrealised Profit',
-        //     data: unrealValues.map((num, i) => num >= 0 || unrealValues[i - 1] >= 0 || unrealValues[i + 1] >= 0 ? num : NaN)
-        // }, {
-        //     name: 'Unrealised Loss',
-        //     data: unrealValues.map((num, i) => num < 0 || unrealValues[i - 1] < 0 ? num : NaN)
-        // }];
-
-        // this.chart$ = of(chart);
     }
 }

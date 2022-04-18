@@ -35,6 +35,22 @@
             </td>
         </ng-container>
 
+        <!-- Side -->
+        <ng-container matColumnDef="side">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>
+                Side
+            </th>
+            <td mat-cell *matCellDef="let trade">
+                <span class="pr-6 whitespace-nowrap">
+                    {{trade.side}}
+                </span>
+                <span class="pr-6 whitespace-nowrap" *ngFor="let closingTrade of trade.closedBy">
+                    <br />
+                    {{closingTrade.side}}
+                </span>
+            </td>
+        </ng-container>
+
         <!-- Price -->
         <ng-container matColumnDef="price">
             <th mat-header-cell mat-sort-header *matHeaderCellDef>
@@ -44,9 +60,9 @@
                 <span class="pr-6 whitespace-nowrap">
                     {{trade.price | currency:'USD'}}
                 </span>
-                <span class="pr-6 whitespace-nowrap">
+                <span class="pr-6 whitespace-nowrap" *ngFor="let closingTrade of trade.closedBy">
                     <br />
-                    {{trade.price | currency:'USD'}}
+                    {{closingTrade.price | currency:'USD'}}
                 </span>
             </td>
         </ng-container>

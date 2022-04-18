@@ -39,15 +39,18 @@ export interface ITrade
     type?: ETradeType;
     amount?: number;
     side?: ETradeSide;
+    status?: ETradeStatus;
     createdAt?: Date;
     updatedAt?: Date;
-    status?: ETradeStatus;
-    cost?: number;
+    openedAt?: Date;
     closedAt?: Date;
+    cost?: number;
     optType?: EOptionType;
     orderType?: EOrderType;
     expiresAt?: Date;
     pnl?: number;
     comment?: string;
+    closing?: string[];
+    closedBy?: ITrade[];
     strategy?: string | any;
 }

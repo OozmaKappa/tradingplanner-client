@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from './api/api.service';
+import { UtilsService } from './utils.service';
 
 @NgModule({
     imports: [
@@ -14,7 +15,7 @@ import { ApiService } from './api/api.service';
         FormsModule,
         ReactiveFormsModule
     ],
-    providers: [ApiService]
+    providers: [ApiService, UtilsService]
 })
 export class SharedModule
 {
