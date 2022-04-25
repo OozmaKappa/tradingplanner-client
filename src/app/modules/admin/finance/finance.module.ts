@@ -15,13 +15,14 @@ import { financeRoutes } from 'app/modules/admin/finance/finance.routing';
 import { FuseCardModule } from '@fuse/components/card';
 import { TradeModule } from '../trade/trade.module';
 import { StrategyModule } from '../strategy/strategy.module';
+import { PortfolioModule } from '../portfolio/portfolio.module';
 
 
 @NgModule({
     declarations: [
         FinanceComponent
     ],
-    imports     : [
+    imports: [
         RouterModule.forChild(financeRoutes),
         FuseCardModule,
         MatButtonModule,
@@ -35,9 +36,9 @@ import { StrategyModule } from '../strategy/strategy.module';
         SharedModule,
         HttpClientModule,
         TradeModule,
-        StrategyModule
+        StrategyModule,
+        PortfolioModule,
     ]
 })
-export class FinanceModule
-{
+export class FinanceModule {
 }

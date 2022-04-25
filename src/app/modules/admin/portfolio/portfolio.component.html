@@ -1,0 +1,42 @@
+<!-- Account balance -->
+<div class="flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
+    <div class="flex flex-col p-6 pb-4">
+        <div class="flex items-center justify-between">
+            <div class="flex flex-col">
+                <div class="mr-4 text-lg font-medium tracking-tight leading-6 truncate">Portfolio
+                    Performance</div>
+                <div class="text-secondary font-medium">Monthly balance growth and avg. monthly income</div>
+            </div>
+            <div class="ml-2">
+                <button class="h-6 min-h-6 px-2 rounded-full bg-hover" mat-button
+                    [matMenuTriggerFor]="accountBalanceMenu">
+                    <span class="font-medium text-sm text-secondary">12 months</span>
+                </button>
+                <mat-menu #accountBalanceMenu="matMenu">
+                    <button mat-menu-item>3 months</button>
+                    <button mat-menu-item>6 months</button>
+                    <button mat-menu-item>9 months</button>
+                    <button mat-menu-item>12 months</button>
+                </mat-menu>
+            </div>
+        </div>
+        <div class="flex items-start mt-6 mr-2">
+            <div class="flex flex-col">
+                <div class="font-semibold text-3xl md:text-5xl tracking-tighter">
+                    {{1}}%</div>
+                <div class="font-medium text-sm text-secondary leading-none">$ 12,310.00</div>
+            </div>
+            <div class="flex flex-col ml-8 md:ml-16">
+                <div class="font-semibold text-3xl md:text-5xl tracking-tighter">{{12 |
+                    currency:'USD'}}</div>
+                <!-- <div class="font-medium text-sm text-secondary leading-none">Average Monthly Income</div> -->
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-col flex-auto">
+        <apx-chart class="flex-auto w-full h-full" [chart]="portfolioBalanceOptions.chart"
+            [colors]="portfolioBalanceOptions.colors" [fill]="portfolioBalanceOptions.fill"
+            [series]="portfolioBalanceOptions.series" [stroke]="portfolioBalanceOptions.stroke"
+            [tooltip]="portfolioBalanceOptions.tooltip" [xaxis]="portfolioBalanceOptions.xaxis"></apx-chart>
+    </div>
+</div>

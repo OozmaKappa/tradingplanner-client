@@ -105,7 +105,7 @@ export class StrategyComponent implements OnInit, AfterViewChecked, OnDestroy {
         //         console.log(`Strategies: ${strategies}`);
         //     });
         this._strategyService.strategies$.forEach((strategies) => {
-            if (strategies) {
+            if (strategies && strategies.length > 0) {
                 console.log(`OnInit strategies$.forEach ${strategies}`);
                 this._prepareChartData(strategies[0].id);
                 this.chart$ = of(this.initialChart);
@@ -146,9 +146,9 @@ export class StrategyComponent implements OnInit, AfterViewChecked, OnDestroy {
         if (!this.pnlData) {
             return 0;
         }
-        const keys = Object.keys(this.pnlData.unrealised);
-        index = isNaN(index) ? keys.length - 1 : index;
-        return this.pnlData.unrealised[keys[index]];
+        const values = this.pnlData.series[0].data;
+        index = isNaN(index) ? values.length - 1 : index;
+        return values[index].y;
     }
 
     getPnLPercentage(): number {
@@ -171,12 +171,12 @@ export class StrategyComponent implements OnInit, AfterViewChecked, OnDestroy {
             .subscribe((pnlData: any) => {
                 if (pnlData) {
                     this.pnlData = pnlData;
-                    this._setChartData(pnlData.realised, pnlData.unrealised);
+                    this._setChartData(pnlData);
                 }
             });
     }
 
-    private _setChartData(realised: { [key: string]: number }, unrealised: { [key: string]: number }): void {
+    private _setChartData(data: any): void {
         // const chart = cloneDeep(this.initialChart);
         // realised.forEach(realValue, index){
         //     this.initialChart.xaxis.categories = Object.keys(realised);
@@ -193,16 +193,17 @@ export class StrategyComponent implements OnInit, AfterViewChecked, OnDestroy {
 
 
 
+        this.initialChart.series = data.series;
 
-        this.initialChart.xaxis.categories = Object.keys(realised);
-        const realValues = Object.values(realised);
-        const unrealValues = Object.values(unrealised);
-        this.initialChart.series = [{
-            name: 'Realised Profit',
-            data: realValues
-        }, {
-            name: 'Unrealised Profit',
-            data: unrealValues
-        }];
+        // this.initialChart.xaxis.categories = Object.keys(realised);
+        // const realValues = Object.values(realised);
+        // const unrealValues = Object.values(unrealised);
+        // this.initialChart.series = [{
+        //     name: 'Realised Profit',
+        //     data: realValues
+        // }, {
+        //     name: 'Unrealised Profit',
+        //     data: unrealValues
+        // }];
     }
 }

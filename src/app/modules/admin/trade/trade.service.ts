@@ -9,8 +9,7 @@ import { ApiService } from 'app/shared/api/api.service';
 @Injectable({
     providedIn: 'root'
 })
-export class TradeService
-{
+export class TradeService {
     // Private
     private _apiService: ApiService;
     private _trade: BehaviorSubject<ITrade | null> = new BehaviorSubject(null);
@@ -18,8 +17,7 @@ export class TradeService
     /**
      * Constructor
      */
-    constructor(private _httpClient: HttpClient)
-    {
+    constructor(private _httpClient: HttpClient) {
         this._apiService = new ApiService('trades');
         this.getTrades().subscribe();
     }
@@ -31,16 +29,14 @@ export class TradeService
     /**
      * Getter for trades
      */
-    get trades$(): Observable<ITrade[]>
-    {
+    get trades$(): Observable<ITrade[]> {
         return this._trades.asObservable();
     }
 
     /**
      * Getter for trade
      */
-    get trade$(): Observable<ITrade>
-    {
+    get trade$(): Observable<ITrade> {
         return this._trade.asObservable();
     }
 
@@ -51,8 +47,7 @@ export class TradeService
     /**
      * Get trades
      */
-    getTrades(): Observable<ITrade[]>
-    {
+    getTrades(): Observable<any> {
         return this._httpClient.get<ITrade[]>(this._apiService.getAllApi()).pipe(
             tap((response: ITrade[]) => {
                 this._trades.next(response);
@@ -63,8 +58,7 @@ export class TradeService
     /**
      * Get trade by id
      */
-    getTradeById(id: string): Observable<ITrade>
-    {
+    getTradeById(id: string): Observable<ITrade> {
         return this._trades.pipe(
             take(1),
             map((trades) => {
@@ -78,8 +72,7 @@ export class TradeService
             }),
             switchMap((trade) => {
 
-                if ( !trade )
-                {
+                if (!trade) {
                     return throwError('Could not found the trade with id of ' + id + '!');
                 }
 
@@ -91,8 +84,7 @@ export class TradeService
     /**
      * Get trade by strategyId
      */
-    getTradesByStrategyId(strategyId: string): Observable<ITrade[]>
-    {
+    getTradesByStrategyId(strategyId: string): Observable<ITrade[]> {
         return this._trades.pipe(
             map(trades => trades.filter(trade => trade && trade.strategy === strategyId))
         );
@@ -103,8 +95,7 @@ export class TradeService
      *
      * @param trade
      */
-    createTrade(trade: ITrade): Observable<ITrade>
-    {
+    createTrade(trade: ITrade): Observable<ITrade> {
         return this._httpClient.post<ITrade>(this._apiService.createApi(), trade).pipe(
             switchMap(response => this.getTrades().pipe(
                 switchMap(() => this.getTradeById(response.id).pipe(
@@ -118,18 +109,16 @@ export class TradeService
      *
      * @param trade
      */
-    updateTrade(trade: ITrade): Observable<ITrade>
-    {
+    updateTrade(trade: ITrade): Observable<ITrade> {
         // Clone the trade to prevent accidental reference based updates
         const updatedTrade = cloneDeep(trade) as any;
 
         // Before sending the trade to the server, handle the labels
-        if ( updatedTrade.labels.length )
-        {
+        if (updatedTrade.labels.length) {
             updatedTrade.labels = updatedTrade.labels.map(label => label.id);
         }
 
-        return this._httpClient.patch<ITrade>('api/apps/trades', {updatedTrade}).pipe(
+        return this._httpClient.patch<ITrade>('api/apps/trades', { updatedTrade }).pipe(
             tap((response) => {
 
                 // Update the trades
@@ -143,9 +132,8 @@ export class TradeService
      *
      * @param trade
      */
-    deleteTrade(trade: ITrade): Observable<boolean>
-    {
-        return this._httpClient.delete<boolean>('api/apps/trades', {params: {id: trade.id}}).pipe(
+    deleteTrade(trade: ITrade): Observable<boolean> {
+        return this._httpClient.delete<boolean>('api/apps/trades', { params: { id: trade.id } }).pipe(
             map((isDeleted: boolean) => {
 
                 // Update the trades
