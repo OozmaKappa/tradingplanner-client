@@ -1,26 +1,32 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApexOptions } from 'ng-apexcharts';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { PortfolioDetailsComponent } from './details/details.component';
 import { PortfolioService } from './portfolio.service';
+import { IPortfolio } from './portfolio.types';
 
 @Component({
     selector: 'app-portfolio',
     templateUrl: './portfolio.component.html',
-    styleUrls: ['./portfolio.component.scss']
 })
 export class PortfolioComponent implements OnInit {
 
     data: any;
+    portfolioData: IPortfolio;
     portfolioBalanceOptions: ApexOptions;
     portfolioDataSource: MatTableDataSource<any> = new MatTableDataSource();
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
-    constructor(private _portfolioService: PortfolioService) { }
+    constructor(
+        private _portfolioService: PortfolioService,
+        private _matDialog: MatDialog,
+    ) { }
 
     ngOnInit(): void {
-        this._portfolioService.data$
+        this._portfolioService.pnlData$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((data) => {
                 console.log(data);
@@ -34,8 +40,30 @@ export class PortfolioComponent implements OnInit {
                 // Prepare the chart data
                 this._prepareChartData();
             });
+        this._portfolioService.portfolioData$
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe((data) => {
+                // console.log(data);
+                // Store the data
+                this.portfolioData = data;
+            });
     }
 
+    /**
+     * On destroy
+     */
+    ngOnDestroy(): void {
+        // Unsubscribe from all subscriptions
+        this._unsubscribeAll.next();
+        this._unsubscribeAll.complete();
+    }
+
+    openNewTradeDialog(): void {
+        this._matDialog.open(PortfolioDetailsComponent, {
+            autoFocus: false,
+            data: { portfolio: this.portfolioData }
+        });
+    }
     // -----------------------------------------------------------------------------------------------------
     // @ Private methods
     // -----------------------------------------------------------------------------------------------------

@@ -8,7 +8,8 @@ import { ApiService } from 'app/shared/api/api.service';
     providedIn: 'root'
 })
 export class PortfolioService {
-    private _data: BehaviorSubject<any> = new BehaviorSubject(null);
+    private _portfolioData: BehaviorSubject<any> = new BehaviorSubject(null);
+    private _portfolioPnLData: BehaviorSubject<any> = new BehaviorSubject(null);
     private _apiService: ApiService;
 
     constructor(private _httpClient: HttpClient) {
@@ -22,21 +23,32 @@ export class PortfolioService {
     /**
      * Getter for data
      */
-    get data$(): Observable<any> {
-        return this._data.asObservable();
+    get pnlData$(): Observable<any> {
+        return this._portfolioPnLData.asObservable();
+    }
+
+    get portfolioData$(): Observable<any> {
+        return this._portfolioData.asObservable();
     }
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
 
     /**
-     * Get data
+     * Get PnL data
      */
-    getData(): Observable<any> {
-        console.log("Getting data for the portfolio")
+    getPnLData(): Observable<any> {
         return this._httpClient.get(this._apiService.getPnL()).pipe(
             tap((response: any) => {
-                this._data.next(response);
+                this._portfolioPnLData.next(response);
+            })
+        );
+    }
+
+    getPortfolioData(): Observable<any> {
+        return this._httpClient.get(this._apiService.getAllApi()).pipe(
+            tap((response: any) => {
+                this._portfolioData.next(response);
             })
         );
     }
