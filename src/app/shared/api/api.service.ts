@@ -52,4 +52,12 @@ export class ApiService {
     refreshToken(): string {
         return `${this._entityUrl}/refresh-access-token`;
     }
+
+    deposit(id: string): any {
+        return `${this._entityUrl}/${id}/deposit`;
+    }
+
+    withdraw(id: string): any {
+        return `${this._entityUrl}/${id}/withdraw`;
+    }
 }

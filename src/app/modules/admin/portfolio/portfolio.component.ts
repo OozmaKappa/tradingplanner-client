@@ -46,6 +46,7 @@ export class PortfolioComponent implements OnInit {
                 // console.log(data);
                 // Store the data
                 this.portfolioData = data;
+                this.portfolioData.transactions.sort((t1, t2) => { return t1.date > t2.date ? -1 : 1 })
             });
     }
 

@@ -12,6 +12,7 @@ export interface ITransaction {
 }
 
 export interface IPortfolio {
+    _id?: string;
     user: string;
     amount: number;
     createdAt: Date;

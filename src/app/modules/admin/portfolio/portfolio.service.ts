@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ApiService } from 'app/shared/api/api.service';
+import { ETransactionType, ITransaction } from './portfolio.types';
 
 @Injectable({
     providedIn: 'root'
@@ -52,6 +53,20 @@ export class PortfolioService {
             })
         );
     }
+
+    createTransaction(portfolioId: string, transaction: ITransaction): Observable<any> {
+        try {
+            const apiUrl = this._apiService[transaction.transactionType](portfolioId); // expect either 'deposit' or 'withdraw'
+            return this._httpClient.post(apiUrl, transaction).pipe(
+                tap((response: any) => {
+                    this._portfolioData.next(response);
+                })
+            );
+        } catch (error) {
+            return;
+        }
+    }
+
 
     // private _setChartData(realised: { [key: string]: number }, unrealised: { [key: string]: number }): void {
     //     this.initialChart.xaxis.categories = Object.keys(realised);
