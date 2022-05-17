@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { UtilsService } from 'app/shared/utils.service';
 import { ApexOptions } from 'ng-apexcharts';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PortfolioDetailsComponent } from './details/details.component';
 import { PortfolioService } from './portfolio.service';
-import { IPortfolio } from './portfolio.types';
+import { ETransactionType, IPortfolio } from './portfolio.types';
 
 @Component({
     selector: 'app-portfolio',
@@ -23,6 +24,7 @@ export class PortfolioComponent implements OnInit {
     constructor(
         private _portfolioService: PortfolioService,
         private _matDialog: MatDialog,
+        private _utils: UtilsService
     ) { }
 
     ngOnInit(): void {
@@ -46,7 +48,7 @@ export class PortfolioComponent implements OnInit {
                 // console.log(data);
                 // Store the data
                 this.portfolioData = data;
-                this.portfolioData.transactions.sort((t1, t2) => { return t1.date > t2.date ? -1 : 1 })
+                this.portfolioData?.transactions.sort((t1, t2) => { return t1.date > t2.date ? -1 : 1 })
             });
     }
 
@@ -59,11 +61,28 @@ export class PortfolioComponent implements OnInit {
         this._unsubscribeAll.complete();
     }
 
-    openNewTradeDialog(): void {
+    openNewTransactionDialog(): void {
         this._matDialog.open(PortfolioDetailsComponent, {
             autoFocus: false,
             data: { portfolio: this.portfolioData }
         });
+    }
+
+    //TODO: consider different timeframes
+    calculateProfit(): number {
+        return this.portfolioData.transactions.reduce((sum, transaction): number => {
+            return transaction && [ETransactionType.PROFIT, ETransactionType.LOSS].includes(transaction.transactionType) ? sum + transaction.amount : sum || 0;
+        }, 0)
+    }
+
+    calculateROI(): number {
+        if (!this.portfolioData) {
+            return 0
+        }
+        const lanstIndex = this.portfolioData.transactions.length - 1;
+        const initialAmount = this.portfolioData.transactions[lanstIndex].portfolioAmount + this.portfolioData.transactions[lanstIndex].amount;
+        const profit = this.calculateProfit();
+        return this._utils.calculatePercentage(initialAmount, profit);
     }
     // -----------------------------------------------------------------------------------------------------
     // @ Private methods

@@ -27,7 +27,7 @@ export class PortfolioDetailsComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.portfolio = this.data.portfolio;
+        this.portfolio = this.data?.portfolio;
 
         this.transactionForm.get('date')?.setValue(new Date())
 
@@ -41,12 +41,20 @@ export class PortfolioDetailsComponent implements OnInit {
         const newTransaction: ITransaction = {
             amount: this.transactionForm.value.amount,
             transactionType: ETransactionType[type],
-            date: this.transactionForm.value.date
+            date: this.transactionForm.value.date,
+            portfolioAmount: 0,
         };
 
         console.log(`Submit transaction with form values: ${JSON.stringify(newTransaction)}`);
-        this._portfolioService.createTransaction(this.portfolio._id, newTransaction).subscribe((res) => {
+        let portfolioObservable;
+        if (this.portfolio?._id) {
+            portfolioObservable = this._portfolioService.createTransaction(this.portfolio._id, newTransaction);
+        } else {
+            portfolioObservable = this._portfolioService.createPortfolio(newTransaction);
+        }
+        portfolioObservable.subscribe((res) => {
             console.log(res);
+            this.portfolio = res;
         });
     }
 

@@ -6,15 +6,11 @@
             <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
         </button>
     </div>
-    <!-- <h1>Current value: {{portfolio.amount | currency: 'USD'}}</h1> -->
     <div class="flex flex-col flex-auto p-6 sm:p-8">
-
-
-        <!-- <form class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto" [formGroup]="transactionForm"> -->
         <form class="flex" [formGroup]="transactionForm">
             <div class="flex items-center w-2/6 mt-6 mr-10 grid">
                 <h1 class="display-4 color-theme-1 mb-1 value">
-                    {{portfolio.amount | currency:'USD':'symbol':'0.0-0'}}
+                    {{portfolio ? portfolio.amount : 0 | currency:'USD':'symbol':'0.0-0'}}
                 </h1>
                 <p class="mb-0 label text-small">Current value</p>
             </div>
@@ -26,14 +22,14 @@
                 </mat-form-field>
 
                 <mat-form-field class="flex-auto" formControlName="date">
-                    <mat-label>Choose a date</mat-label>
+                    <mat-label>Date</mat-label>
                     <input matInput [matDatepicker]="picker1" formControlName="date">
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
                 </mat-form-field>
                 <div class="flex items-center gap-4">
-                    <button type="submit" mat-raised-button mat-dialog-close [disabled]="!transactionForm.valid"
-                        (click)="onSubmit('WITHDRAW')">Withdraw</button>
+                    <button *ngIf="portfolio" type="submit" mat-raised-button mat-dialog-close
+                        [disabled]="!transactionForm.valid" (click)="onSubmit('WITHDRAW')">Withdraw</button>
                     <button type="submit" mat-raised-button mat-dialog-close [disabled]="!transactionForm.valid"
                         (click)="onSubmit('DEPOSIT')">Deposit</button>
                 </div>
@@ -41,8 +37,7 @@
         </form>
     </div>
 
-
-    <div class="flex flex-auto justify-center p-6 sm:p-8 overflow-y-auto">
+    <div *ngIf="portfolio" class="flex flex-auto justify-center p-6 sm:p-8 overflow-y-auto">
         <perfect-scrollbar class="scroll max-w-md" [config]="{suppressScrollX: true, wheelPropagation: false}">
             <table class="table table-sm table-borderless">
                 <tbody>

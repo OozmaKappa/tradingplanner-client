@@ -7,8 +7,8 @@
                     Performance</div>
                 <div class="text-secondary font-medium">Monthly balance growth and avg. monthly income</div>
             </div>
-            <div class="ml-2">
-                <button class="h-6 min-h-6 px-2 rounded-full bg-hover" mat-button
+            <!-- <div class="ml-2">
+                    <button class="h-6 min-h-6 px-2 rounded-full bg-hover" mat-button
                     [matMenuTriggerFor]="accountBalanceMenu">
                     <span class="font-medium text-sm text-secondary">12 months</span>
                 </button>
@@ -18,27 +18,37 @@
                     <button mat-menu-item>9 months</button>
                     <button mat-menu-item>12 months</button>
                 </mat-menu>
+            </div> -->
+        </div>
+        <div *ngIf="portfolioData">
+            <div class="flex items-start mt-6 mr-2">
+                <div class="flex flex-col">
+                    <div class="font-semibold text-3xl md:text-5xl tracking-tighter">
+                        {{calculateROI()}}%</div>
+                    <div class="font-medium text-sm text-secondary leading-none">{{calculateProfit() | currency:'USD'}}
+                    </div>
+                </div>
+                <div class="flex flex-col ml-8 md:ml-16">
+                    <div class="font-semibold text-3xl md:text-5xl tracking-tighter"><span class="cursor-pointer"
+                            (click)="openNewTransactionDialog()">{{portfolioData.amount | currency:'USD'}}</span></div>
+                    <!-- <div class="font-medium text-sm text-secondary leading-none">Average Monthly Income</div> -->
+                </div>
+            </div>
+            <div class="flex flex-col flex-auto">
+                <apx-chart class="flex-auto w-full h-full" [chart]="portfolioBalanceOptions.chart"
+                    [colors]="portfolioBalanceOptions.colors" [fill]="portfolioBalanceOptions.fill"
+                    [series]="portfolioBalanceOptions.series" [stroke]="portfolioBalanceOptions.stroke"
+                    [tooltip]="portfolioBalanceOptions.tooltip" [xaxis]="portfolioBalanceOptions.xaxis"></apx-chart>
             </div>
         </div>
-        <div class="flex items-start mt-6 mr-2">
-            <div class="flex flex-col">
-                <div class="font-semibold text-3xl md:text-5xl tracking-tighter">
-                    {{1}}%</div>
-                <div class="font-medium text-sm text-secondary leading-none">$ 12,310.00</div>
-            </div>
-            <div class="flex flex-col ml-8 md:ml-16">
-                <div class="font-semibold text-3xl md:text-5xl tracking-tighter"><span class="cursor-pointer"
-                        (click)="openNewTradeDialog()">{{12
-                        |
-                        currency:'USD'}}</span></div>
-                <!-- <div class="font-medium text-sm text-secondary leading-none">Average Monthly Income</div> -->
+        <div *ngIf="!portfolioData">
+            <div class="flex place-content-evenly p-6 pb-4">
+                <button class="sm:inline-flex ml-3" mat-flat-button [color]="'primary'"
+                    (click)="openNewTransactionDialog()">
+                    <mat-icon svgIcon="mat_outline:add"></mat-icon>
+                    <span class="ml-2">Create Portfolio</span>
+                </button>
             </div>
         </div>
-    </div>
-    <div class="flex flex-col flex-auto">
-        <apx-chart class="flex-auto w-full h-full" [chart]="portfolioBalanceOptions.chart"
-            [colors]="portfolioBalanceOptions.colors" [fill]="portfolioBalanceOptions.fill"
-            [series]="portfolioBalanceOptions.series" [stroke]="portfolioBalanceOptions.stroke"
-            [tooltip]="portfolioBalanceOptions.tooltip" [xaxis]="portfolioBalanceOptions.xaxis"></apx-chart>
     </div>
 </div>

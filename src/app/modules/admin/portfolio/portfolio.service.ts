@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ApiService } from 'app/shared/api/api.service';
-import { ETransactionType, ITransaction } from './portfolio.types';
+import { ETransactionType, IPortfolio, ITransaction } from './portfolio.types';
 
 @Injectable({
     providedIn: 'root'
@@ -35,6 +35,17 @@ export class PortfolioService {
     // @ Public methods
     // -----------------------------------------------------------------------------------------------------
 
+    createPortfolio(transaction: ITransaction): Observable<any> {
+        try {
+            return this._httpClient.post(this._apiService.createApi(), transaction).pipe(
+                tap((response: any) => {
+                    this._portfolioData.next(response);
+                })
+            );
+        } catch (error) {
+            return;
+        }
+    }
     /**
      * Get PnL data
      */

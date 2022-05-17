@@ -6,6 +6,7 @@ export enum ETransactionType {
 }
 
 export interface ITransaction {
+    portfolioAmount: number;
     transactionType: ETransactionType;
     amount: number;
     date: Date;
