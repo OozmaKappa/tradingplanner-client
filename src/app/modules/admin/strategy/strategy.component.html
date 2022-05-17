@@ -35,7 +35,7 @@
             <div class="flex flex-col flex-auto bg-card shadow rounded-xl overflow-hidden">
                 <div class="flex items-start justify-between m-6 mb-0">
                     <div class="text-lg font-medium tracking-tight leading-6 truncate">Strategy Performance</div>
-                    <div class="ml-2">
+                    <!-- <div class="ml-2">
                         <button class="h-6 min-h-6 px-2 rounded-full bg-hover" mat-button
                             [matMenuTriggerFor]="impressionsMenu">
                             <span class="font-medium text-sm text-secondary">30 days</span>
@@ -45,22 +45,22 @@
                             <button mat-menu-item>3 months</button>
                             <button mat-menu-item>9 months</button>
                         </mat-menu>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="flex flex-col lg:flex-row lg:items-center mx-6 mt-3">
-                    <div class="text-7xl font-bold tracking-tighter leading-tight">{{getPnL()}}</div>
+                    <div class="text-7xl tracking-tighter leading-tight">{{getPnL() | currency:'USD'}}</div>
                     <!-- <div class="text-7xl font-bold tracking-tighter leading-tight">{{data1.impressions.amount | number:'1.0-0'}}</div> -->
                     <div class="flex lg:flex-col lg:ml-3">
-                        <mat-icon *ngIf="getPnLPercentage() < 0" class="icon-size-5 text-red-500"
+                        <mat-icon *ngIf="getPnLPercentage(strategy) < 0" class="icon-size-5 text-red-500"
                             [svgIcon]="'heroicons_solid:trending-down'">
                         </mat-icon>
-                        <mat-icon *ngIf="getPnLPercentage() > 0" class="icon-size-5 text-green-500"
+                        <mat-icon *ngIf="getPnLPercentage(strategy) > 0" class="icon-size-5 text-green-500"
                             [svgIcon]="'heroicons_solid:trending-up'">
                         </mat-icon>
                         <div
                             class="flex items-center ml-1 lg:ml-0 lg:mt-0.5 text-md leading-none whitespace-nowrap text-secondary">
                             <span class="font-medium"
-                                [ngClass]="getPnLPercentage() > 0 ? 'text-green-500' : 'text-red-500'">{{getPnLPercentage()}}%</span>
+                                [ngClass]="getPnLPercentage(strategy) > 0 ? 'text-green-500' : 'text-red-500'">{{getPnLPercentage(strategy)}}%</span>
                             <!-- <span class="ml-1">below target</span> -->
                         </div>
                     </div>
@@ -97,10 +97,6 @@
                             <div class="text-lg font-medium tracking-tight leading-6 truncate">{{strategy.name}}</div>
                             <div class="mt-4">
                                 {{strategy.comment}}
-                                <br><br>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                             </div>
                         </div>
                     </div>

@@ -1,13 +1,11 @@
 import { AfterViewChecked, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTab } from '@angular/material/tabs';
 import { UtilsService } from 'app/shared/utils.service';
-import { cloneDeep } from 'lodash';
-import { ApexAxisChartSeries, ApexOptions } from 'ng-apexcharts';
+import { ApexOptions } from 'ng-apexcharts';
 import { Observable, of } from 'rxjs';
 import { Subject } from 'rxjs/internal/Subject';
-import { first, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { StrategyDetailsComponent } from './details/details.component';
 import { StrategyService } from './strategy.service';
 import { IStrategy } from './strategy.types';
@@ -34,9 +32,9 @@ export class StrategyComponent implements OnInit, AfterViewChecked, OnDestroy {
                 enabled: true
             }
         },
-        colors: ['#34D399', '#EF4444'],
+        colors: ['#A3BFFA', '#667EEA'],
         fill: {
-            colors: ['#34D399'],
+            colors: ['#CED9FB', '#AECDFD'],
             opacity: 0.5
         },
         series: [
@@ -151,10 +149,11 @@ export class StrategyComponent implements OnInit, AfterViewChecked, OnDestroy {
         return values[index].y;
     }
 
-    getPnLPercentage(): number {
-        const firstPnL = this.getPnL(0);
+    getPnLPercentage(strategy: IStrategy): number {
+        const seedCap = strategy?.seed;
+        console.log(`Selected stratgies' cap is ${seedCap}`);
         const lastPnL = this.getPnL();
-        return firstPnL !== 0 ? this._utils.calculateRelativeDevelopment(firstPnL, lastPnL) : 100;
+        return seedCap ? this._utils.calculatePercentage(seedCap, lastPnL) : 100;
         // return this.pnlData.unrealised[lastKey];
     }
 

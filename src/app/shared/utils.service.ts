@@ -16,6 +16,6 @@ export class UtilsService {
         if (!base) {
             throw new Error('Attribute \'base\' cannot be 0 or NaN!');
         }
-        return Math.round((data / Math.abs(base)) * 100);
+        return Math.round((data / Math.abs(base) + Number.EPSILON) * 100);
     }
 }
