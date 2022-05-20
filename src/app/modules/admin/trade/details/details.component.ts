@@ -47,9 +47,11 @@ export class TradeDetailsComponent implements OnInit, OnDestroy {
             amount: ['', [Validators.required]],
             price: ['', [Validators.required]],
             order_type: ['LMT', [Validators.required]],
+            openedAt: [''],
+            cost: ['1.00'],
             comment: ['']
         });
-
+        this.tradeForm.get('openedAt')?.setValue(new Date())
         // Subscribe to trade updates
         this.tradeChanged
             .pipe(
@@ -96,6 +98,8 @@ export class TradeDetailsComponent implements OnInit, OnDestroy {
             amount: form.value.amount,
             side: form.value.side,
             orderType: form.value.order_type,
+            openedAt: form.value.openedAt,
+            cost: form.value.cost,
             comment: form.value.comment,
             strategy: this.data.strategyId
         };

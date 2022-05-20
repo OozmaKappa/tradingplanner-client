@@ -16,6 +16,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { TradeCardComponent } from './card/card.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 const tradeRoutes: Route[] = [
     {
@@ -38,6 +39,7 @@ const tradeRoutes: Route[] = [
         RouterModule.forChild(tradeRoutes),
         MatButtonModule,
         MatButtonToggleModule,
+        MatDatepickerModule,
         MatDialogModule,
         MatDividerModule,
         MatFormFieldModule,
