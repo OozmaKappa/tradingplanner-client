@@ -84,6 +84,16 @@ export class PortfolioComponent implements OnInit {
         const profit = this.calculateProfit();
         return this._utils.calculatePercentage(initialAmount, profit);
     }
+
+    getUnrealizedPercentage(): number {
+        const i = this.data.series[0].data.length - 1
+        return this.data.series[0].data[i].y
+    }
+
+    getUnrealizedAmount(): number {
+        const i = this.data.series[0].data.length - 1
+        return this.data.series[0].data[i].amount
+    }
     // -----------------------------------------------------------------------------------------------------
     // @ Private methods
     // -----------------------------------------------------------------------------------------------------
