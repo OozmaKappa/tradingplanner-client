@@ -6,7 +6,7 @@ import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TradeDetailsComponent } from '../details/details.component';
 import { TradeService } from '../trade.service';
-import { ITrade } from '../trade.types';
+import { ETradeStatus, ITrade } from '../trade.types';
 
 @Component({
     selector: 'trade-list',
@@ -19,9 +19,10 @@ export class TradeListComponent implements OnInit, OnDestroy {
     @ViewChild('recentTransactionsTable', { read: MatSort }) recentTransactionsTableMatSort: MatSort;
     trades$: Observable<ITrade[]>;
     trades: ITrade[];
+    tradeStatus: typeof ETradeStatus = ETradeStatus;
 
     tradesDataSource: MatTableDataSource<any> = new MatTableDataSource();
-    tradesTableColumns: string[] = ['ticker', 'updatedAt', 'side', 'price', 'amount', 'pnl', 'status'];
+    tradesTableColumns: string[] = ['ticker', 'updatedAt', 'side', 'price', 'amount', 'pnl', 'status', 'actions'];
 
     drawerMode: 'over' | 'side' = 'side';
     drawerOpened: boolean = true;
@@ -73,11 +74,11 @@ export class TradeListComponent implements OnInit, OnDestroy {
                 console.log(trades);
                 if (this.strategyId) {
                     this._tradeService.getTradesByStrategyId(this.strategyId)
-                    .pipe(takeUntil(this._unsubscribeAll))
-                    .subscribe(
-                        (strategyTrades) => {
-                            this.tradesDataSource.data = strategyTrades;
-                            console.log(`strategyTrades: ${strategyTrades}`);
+                        .pipe(takeUntil(this._unsubscribeAll))
+                        .subscribe(
+                            (strategyTrades) => {
+                                this.tradesDataSource.data = strategyTrades;
+                                console.log(`strategyTrades: ${strategyTrades}`);
                             }
                         );
                 }
@@ -123,5 +124,10 @@ export class TradeListComponent implements OnInit, OnDestroy {
         //     console.log('Get trades after close dialog');
         //     this._tradeService.getTrades();
         // });
+    }
+
+    calculateTradesByStatus(status: ETradeStatus): number {
+        const filteredData = this.tradesDataSource.data.filter(trade => trade.status === status);
+        return filteredData.length;
     }
 }
