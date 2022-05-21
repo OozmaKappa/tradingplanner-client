@@ -2,35 +2,34 @@ export enum ETradeType {
     STK = 'STK',
     OPT = 'OPT',
     CASH = 'CASH',
-  }
+}
 
-  export enum ETradeSide {
+export enum ETradeSide {
     SELL = 'SELL',
     BUY = 'BUY',
-  }
+}
 
-  export enum EOptionType {
+export enum EOptionType {
     P = 'PUT',
     C = 'CALL',
-  }
+}
 
-  export enum EOrderType {
+export enum EOrderType {
     MKT = 'MKT',
     LMT = 'LMT',
     STP = 'STP',
     STP_LIMIT = 'STP_LIMIT',
-  }
+}
 
-  export enum ETradeStatus {
+export enum ETradeStatus {
     open = 'open',
     running = 'running',
     waiting = 'waiting',
     closed = 'closed',
-  }
+}
 
-export interface ITrade
-{
-    id?: string;
+export interface ITrade {
+    _id?: string;
     tradeId?: string;
     contractId?: number;
     ticker?: string;

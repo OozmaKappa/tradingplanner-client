@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { take, takeUntil } from 'rxjs/operators';
 import { TradeDetailsComponent } from '../details/details.component';
 import { TradeService } from '../trade.service';
 import { ETradeStatus, ITrade } from '../trade.types';
@@ -16,7 +16,7 @@ import { ETradeStatus, ITrade } from '../trade.types';
 })
 export class TradeListComponent implements OnInit, OnDestroy {
     @Input() strategyId: string;
-    @ViewChild('recentTransactionsTable', { read: MatSort }) recentTransactionsTableMatSort: MatSort;
+    // @ViewChild('recentTradesTable', { read: MatSort }) recentTradesTableMatSort: MatSort;
     trades$: Observable<ITrade[]>;
     trades: ITrade[];
     tradeStatus: typeof ETradeStatus = ETradeStatus;
@@ -24,11 +24,11 @@ export class TradeListComponent implements OnInit, OnDestroy {
     tradesDataSource: MatTableDataSource<any> = new MatTableDataSource();
     tradesTableColumns: string[] = ['ticker', 'updatedAt', 'side', 'price', 'amount', 'pnl', 'status', 'actions'];
 
-    drawerMode: 'over' | 'side' = 'side';
-    drawerOpened: boolean = true;
-    filter$: BehaviorSubject<string> = new BehaviorSubject('notes');
-    searchQuery$: BehaviorSubject<string> = new BehaviorSubject(null);
-    masonryColumns: number = 4;
+    // drawerMode: 'over' | 'side' = 'side';
+    // drawerOpened: boolean = true;
+    // filter$: BehaviorSubject<string> = new BehaviorSubject('notes');
+    // searchQuery$: BehaviorSubject<string> = new BehaviorSubject(null);
+    // masonryColumns: number = 4;
 
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
@@ -37,7 +37,8 @@ export class TradeListComponent implements OnInit, OnDestroy {
      */
     constructor(
         private _matDialog: MatDialog,
-        private _tradeService: TradeService
+        private _tradeService: TradeService,
+        private changeDetectorRefs: ChangeDetectorRef
     ) {
     }
 
@@ -48,9 +49,9 @@ export class TradeListComponent implements OnInit, OnDestroy {
     /**
      * Get the filter status
      */
-    get filterStatus(): string {
-        return this.filter$.value;
-    }
+    // get filterStatus(): string {
+    //     return this.filter$.value;
+    // }
 
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
@@ -67,27 +68,9 @@ export class TradeListComponent implements OnInit, OnDestroy {
         this.trades$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((trades) => {
-                // Store the table data
-
-                // Prepare the chart data
-                // this._prepareChartData();
-                console.log(trades);
-                if (this.strategyId) {
-                    this._tradeService.getTradesByStrategyId(this.strategyId)
-                        .pipe(takeUntil(this._unsubscribeAll))
-                        .subscribe(
-                            (strategyTrades) => {
-                                this.tradesDataSource.data = strategyTrades;
-                                console.log(`strategyTrades: ${strategyTrades}`);
-                            }
-                        );
-                }
+                this.updateDataSource(trades);
             });
-
         console.log(`strategyId: ${this.strategyId}`);
-        // this.trades$.forEach((trade) => {
-        //   console.log(trade);
-        // });
     }
 
     /**
@@ -124,6 +107,31 @@ export class TradeListComponent implements OnInit, OnDestroy {
         //     console.log('Get trades after close dialog');
         //     this._tradeService.getTrades();
         // });
+    }
+
+    /**
+     * Open the trade details view
+     */
+    openTradeDialog(trade: ITrade): void {
+        this._matDialog.open(TradeDetailsComponent, {
+            autoFocus: false,
+            data: { strategyId: this.strategyId, trade }
+        });
+    }
+
+    updateDataSource(trades) {
+        console.log(trades);
+        if (this.strategyId) {
+            this._tradeService.getTradesByStrategyId(this.strategyId)
+                .pipe(take(1))
+                .subscribe(
+                    (strategyTrades) => {
+                        this.tradesDataSource.data = [...strategyTrades];
+                        console.log(`strategyTrades: ${strategyTrades.length}`);
+                        this.changeDetectorRefs.detectChanges();
+                    }
+                );
+        }
     }
 
     calculateTradesByStatus(status: ETradeStatus): number {

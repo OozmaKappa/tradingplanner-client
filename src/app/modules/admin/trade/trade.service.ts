@@ -62,7 +62,7 @@ export class TradeService {
         return this._trades.pipe(
             take(1),
             map((trades) => {
-                const trade = trades.find(value => value.id === id) || null;
+                const trade = trades.find(value => value._id === id) || null;
 
                 // Update the trade
                 this._trade.next(trade);
@@ -86,6 +86,7 @@ export class TradeService {
      */
     getTradesByStrategyId(strategyId: string): Observable<ITrade[]> {
         return this._trades.pipe(
+            take(1),
             map(trades => trades.filter(trade => trade && trade.strategy === strategyId))
         );
     }
@@ -98,7 +99,7 @@ export class TradeService {
     createTrade(trade: ITrade): Observable<ITrade> {
         return this._httpClient.post<ITrade>(this._apiService.createApi(), trade).pipe(
             switchMap(response => this.getTrades().pipe(
-                switchMap(() => this.getTradeById(response.id).pipe(
+                switchMap(() => this.getTradeById(response._id).pipe(
                     map(() => response)
                 ))
             )));
@@ -110,21 +111,19 @@ export class TradeService {
      * @param trade
      */
     updateTrade(trade: ITrade): Observable<ITrade> {
-        // Clone the trade to prevent accidental reference based updates
-        const updatedTrade = cloneDeep(trade) as any;
-
-        // Before sending the trade to the server, handle the labels
-        if (updatedTrade.labels.length) {
-            updatedTrade.labels = updatedTrade.labels.map(label => label.id);
-        }
-
-        return this._httpClient.patch<ITrade>('api/apps/trades', { updatedTrade }).pipe(
-            tap((response) => {
-
-                // Update the trades
-                this.getTrades().subscribe();
+        return this._httpClient.patch<ITrade>(this._apiService.updateApi(trade._id), trade).pipe(
+            switchMap(() => {
+                console.log('Call getTrades() after updateTrade')
+                return this.getTrades()
             })
         );
+        // return this._httpClient.patch<ITrade>('api/apps/trades', { updatedTrade }).pipe(
+        //     tap((response) => {
+
+        //         // Update the trades
+        //         this.getTrades().subscribe();
+        //     })
+        // );
     }
 
     /**
@@ -133,7 +132,7 @@ export class TradeService {
      * @param trade
      */
     deleteTrade(trade: ITrade): Observable<boolean> {
-        return this._httpClient.delete<boolean>('api/apps/trades', { params: { id: trade.id } }).pipe(
+        return this._httpClient.delete<boolean>('api/apps/trades', { params: { id: trade._id } }).pipe(
             map((isDeleted: boolean) => {
 
                 // Update the trades

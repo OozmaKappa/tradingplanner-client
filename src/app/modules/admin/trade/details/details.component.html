@@ -1,7 +1,7 @@
 <div class="flex flex-col max-w-340 md:min-w-200 max-h-screen -m-6">
     <!-- Header -->
     <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
-        <div class="text-lg font-medium">New Trade</div>
+        <div class="text-lg font-medium">{{data.trade ? 'Update Trade' : 'New Trade'}}</div>
         <button mat-icon-button (click)="onNoClick()" [tabIndex]="-1">
             <mat-icon class="text-current" [svgIcon]="'heroicons_outline:x'"></mat-icon>
         </button>
@@ -55,9 +55,9 @@
                 <span matPrefix>$</span>
             </mat-form-field>
 
-            <mat-form-field class="flex-auto col-span-2" formControlName="openedAt">
+            <mat-form-field class="flex-auto col-span-2">
                 <mat-label>Opened at</mat-label>
-                <input matInput [matDatepicker]="picker1" formControlName="openedAt">
+                <input matInput [matDatepicker]="picker1" formControlName="opened_at">
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
             </mat-form-field>

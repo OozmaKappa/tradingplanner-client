@@ -23,7 +23,7 @@ export class TradeDetailsComponent implements OnInit, OnDestroy {
      * Constructor
      */
     constructor(
-        @Inject(MAT_DIALOG_DATA) public data: { strategyId: string },
+        @Inject(MAT_DIALOG_DATA) public data: { strategyId: string, trade: ITrade },
         private _changeDetectorRef: ChangeDetectorRef,
         private _tradeService: TradeService,
         private _formBuilder: FormBuilder,
@@ -41,17 +41,17 @@ export class TradeDetailsComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         // Create the form
         this.tradeForm = this._formBuilder.group({
-            side: ['BUY', [Validators.required]],
-            trade_type: ['STK', [Validators.required]],
-            ticker: ['', [Validators.required]],
-            amount: ['', [Validators.required]],
-            price: ['', [Validators.required]],
-            order_type: ['LMT', [Validators.required]],
-            openedAt: [''],
-            cost: ['1.00'],
-            comment: ['']
+            side: [this.data.trade?.side || 'BUY', [Validators.required]],
+            trade_type: [this.data.trade?.type || 'STK', [Validators.required]],
+            ticker: [this.data.trade?.ticker || '', [Validators.required]],
+            amount: [this.data.trade?.amount || '', [Validators.required]],
+            price: [this.data.trade?.price || '', [Validators.required]],
+            order_type: [this.data.trade?.orderType || 'LMT', [Validators.required]],
+            opened_at: [this.data.trade?.openedAt || new Date()],
+            cost: [this.data.trade?.cost || '1.00'],
+            comment: [this.data.trade?.comment || '']
         });
-        this.tradeForm.get('openedAt')?.setValue(new Date())
+        // this.tradeForm.get('opened_at')?.setValue(new Date())
         // Subscribe to trade updates
         this.tradeChanged
             .pipe(
@@ -92,22 +92,29 @@ export class TradeDetailsComponent implements OnInit, OnDestroy {
 
     onSubmit(form): void {
         const newTrade: ITrade = {
+            _id: this.data.trade?._id,
             ticker: form.value.ticker,
             price: form.value.price,
             type: form.value.trade_type,
             amount: form.value.amount,
             side: form.value.side,
             orderType: form.value.order_type,
-            openedAt: form.value.openedAt,
+            openedAt: form.value.opened_at,
             cost: form.value.cost,
             comment: form.value.comment,
             strategy: this.data.strategyId
         };
 
         console.log(`Submit trade with form values: ${JSON.stringify(newTrade)}`);
-        this._tradeService.createTrade(newTrade).subscribe((res) => {
-            console.log(res);
-        });
+        if (this.data.trade) {
+            this._tradeService.updateTrade(newTrade).subscribe((res) => {
+                console.log(res);
+            });
+        } else {
+            this._tradeService.createTrade(newTrade).subscribe((res) => {
+                console.log(res);
+            });
+        }
     }
 
     onNoClick(): void {
