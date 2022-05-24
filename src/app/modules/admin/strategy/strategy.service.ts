@@ -9,125 +9,107 @@ import { tap } from 'rxjs/internal/operators/tap';
 import { IStrategy } from './strategy.types';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class StrategyService {
 
-  private _strategy: BehaviorSubject<IStrategy | null> = new BehaviorSubject(null);
-  private _strategies: BehaviorSubject<IStrategy[] | null> = new BehaviorSubject(null);
-  private _apiService: ApiService;
-  /**
-   * Constructor
-   */
-  constructor(private _httpClient: HttpClient)
-  {
-    this._apiService = new ApiService('strategy');
-  }
+    private _strategy: BehaviorSubject<IStrategy | null> = new BehaviorSubject(null);
+    private _strategies: BehaviorSubject<IStrategy[] | null> = new BehaviorSubject(null);
+    private _apiService: ApiService;
+    /**
+     * Constructor
+     */
+    constructor(private _httpClient: HttpClient) {
+        this._apiService = new ApiService('strategy');
+    }
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Accessors
-  // -----------------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------
+    // @ Accessors
+    // -----------------------------------------------------------------------------------------------------
 
-  /**
-   * Getter for strategie
-   * s
-   */
-  get strategies$(): Observable<IStrategy[]>
-  {
-      return this._strategies.asObservable();
-  }
+    /**
+     * Getter for strategie
+     * s
+     */
+    get strategies$(): Observable<IStrategy[]> {
+        return this._strategies.asObservable();
+    }
 
-  /**
-   * Getter for strategy
-   */
-  get strategy$(): Observable<IStrategy>
-  {
-      return this._strategy.asObservable();
-  }
+    /**
+     * Getter for strategy
+     */
+    get strategy$(): Observable<IStrategy> {
+        return this._strategy.asObservable();
+    }
 
-  // -----------------------------------------------------------------------------------------------------
-  // @ Public methods
-  // -----------------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------
+    // @ Public methods
+    // -----------------------------------------------------------------------------------------------------
 
-  /**
-   * Get strategies
-   */
-  getStrategies(): Observable<IStrategy[]>
-  {
-      return this._httpClient.get<IStrategy[]>(this._apiService.getAllApi()).pipe(
-          tap((response: IStrategy[]) => {
-              this._strategies.next(response);
-          })
-      );
-  }
-
-  /**
-   * Create strategy
-   *
-   * @param strategy
-   */
-  createStrategy(strategy: IStrategy): Observable<IStrategy>
-  {
-      return this._httpClient.post<IStrategy>(this._apiService.createApi(), strategy).pipe(
-          // switchMap(response => this.getStrategys().pipe(
-          //     switchMap(() => this.getStrategyById(response.id).pipe(
-                  map(response => response)
-          //     ))
-          // ))
+    /**
+     * Get strategies
+     */
+    getStrategies(): Observable<IStrategy[]> {
+        return this._httpClient.get<IStrategy[]>(this._apiService.getAllApi()).pipe(
+            tap({
+                next: (response: IStrategy[]) => {
+                    this._strategies.next(response);
+                },
+                error: e => { console.log(e) }
+            })
         );
-  }
+    }
 
-  /**
-   * Update the strategy
-   *
-   * @param strategy
-   */
-  updateStrategy(strategy: IStrategy): Observable<IStrategy>
-  {
-      // Clone the strategy to prevent accidental reference based updates
-      const updatedStrategy = cloneDeep(strategy) as any;
+    /**
+     * Create strategy
+     *
+     * @param strategy
+     */
+    createStrategy(strategy: IStrategy): Observable<IStrategy> {
+        return this._httpClient.post<IStrategy>(this._apiService.createApi(), strategy).pipe(
+            // switchMap(response => this.getStrategys().pipe(
+            //     switchMap(() => this.getStrategyById(response.id).pipe(
+            map(response => response)
+            //     ))
+            // ))
+        );
+    }
 
-      // Before sending the strategy to the server, handle the labels
-      if ( updatedStrategy.labels.length )
-      {
-          updatedStrategy.labels = updatedStrategy.labels.map(label => label.id);
-      }
+    /**
+     * Update the strategy
+     *
+     * @param strategy
+     */
+    updateStrategy(strategy: IStrategy): Observable<IStrategy> {
+        return this._httpClient.patch<IStrategy>(this._apiService.updateApi(strategy._id), strategy).pipe(
+            tap(() => { this.getStrategies().subscribe() })
+        );
+    }
 
-      return this._httpClient.patch<IStrategy>('api/apps/strategies', {updatedStrategy}).pipe(
-          tap((response) => {
+    /**
+     * Delete the strategy
+     *
+     * @param strategy
+     */
+    deleteStrategy(strategy: IStrategy): Observable<boolean> {
+        return this._httpClient.delete<boolean>('api/apps/strategies', { params: { id: strategy._id } }).pipe(
+            map((isDeleted: boolean) => {
 
-              // Update the strategies
-              this.getStrategies().subscribe();
-          })
-      );
-  }
+                // Update the strategies
+                this.getStrategies().subscribe();
 
-  /**
-   * Delete the strategy
-   *
-   * @param strategy
-   */
-  deleteStrategy(strategy: IStrategy): Observable<boolean>
-  {
-      return this._httpClient.delete<boolean>('api/apps/strategies', {params: {id: strategy.id}}).pipe(
-          map((isDeleted: boolean) => {
+                // Return the deleted status
+                return isDeleted;
+            })
+        );
+    }
 
-              // Update the strategies
-              this.getStrategies().subscribe();
-
-              // Return the deleted status
-              return isDeleted;
-          })
-      );
-  }
-
-  /**
-   * Get strategy PnL
-   *
-   * @param strategyId
-   */
-  getPnL(strategyId: string): Observable<boolean>
-  {
-      return this._httpClient.get<boolean>(this._apiService.strategyPnL(strategyId));
-  }
+    /**
+     * Get strategy PnL
+     *
+     * @param strategyId
+     */
+    getPnL(strategyId: string): Observable<boolean> {
+        return this._httpClient.get<boolean>(this._apiService.strategyPnL(strategyId));
+    }
 }

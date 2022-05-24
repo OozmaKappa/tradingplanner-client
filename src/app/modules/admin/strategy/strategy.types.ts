@@ -1,6 +1,5 @@
-export interface IStrategy
-{
-    id?: string;
+export interface IStrategy {
+    _id?: string;
     name: string;
     seed?: number;
     maxLoss?: number;

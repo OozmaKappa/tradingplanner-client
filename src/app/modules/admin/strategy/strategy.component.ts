@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewChecked, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { UtilsService } from 'app/shared/utils.service';
@@ -13,6 +13,7 @@ import { IStrategy } from './strategy.types';
 @Component({
     selector: 'app-strategy',
     templateUrl: './strategy.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StrategyComponent implements OnInit, AfterViewChecked, OnDestroy {
 
@@ -80,12 +81,15 @@ export class StrategyComponent implements OnInit, AfterViewChecked, OnDestroy {
     constructor(
         private _matDialog: MatDialog,
         private _strategyService: StrategyService,
-        private _utils: UtilsService
+        private _utils: UtilsService,
+        private changeDetectorRefs: ChangeDetectorRef
     ) { }
 
     ngOnInit(): void {
         // Request the data from the server
-        this._strategyService.getStrategies().subscribe();
+        this._strategyService.getStrategies().subscribe((strategies) => {
+            console.log(`Subscribe on getStrategies: ${strategies.length}`)
+        });
         this.strategies$ = this._strategyService.strategies$;
         // this.strategies$.subscribe((strategies) => {
         //     if (strategies[0] && strategies[0].id) {
@@ -102,13 +106,22 @@ export class StrategyComponent implements OnInit, AfterViewChecked, OnDestroy {
         //         }
         //         console.log(`Strategies: ${strategies}`);
         //     });
-        this._strategyService.strategies$.forEach((strategies) => {
-            if (strategies && strategies.length > 0) {
-                console.log(`OnInit strategies$.forEach ${strategies}`);
-                this._prepareChartData(strategies[0].id);
-                this.chart$ = of(this.initialChart);
-            }
-        });
+        this.strategies$
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe((strategies) => {
+                if (strategies?.length > 0) {
+                    console.log(`OnInit strategies$.forEach ${strategies}`);
+                    this._prepareChartData(strategies[0]._id);
+                    this.chart$ = of(this.initialChart);
+                }
+            });
+        // .forEach((strategies) => {
+        //     if (strategies && strategies.length > 0) {
+        //         console.log(`OnInit strategies$.forEach ${strategies}`);
+        //         this._prepareChartData(strategies[0]._id);
+        //         this.chart$ = of(this.initialChart);
+        //     }
+        // });
     }
 
     ngAfterViewChecked(): void {
@@ -133,6 +146,19 @@ export class StrategyComponent implements OnInit, AfterViewChecked, OnDestroy {
     openNewStrategyDialog(): void {
         this._matDialog.open(StrategyDetailsComponent, {
             autoFocus: false
+        });
+    }
+    /**
+     * Open the strategy detail dialog
+     */
+    openStrategyDialog(strategy: IStrategy): void {
+        this._matDialog.open(StrategyDetailsComponent, {
+            autoFocus: false,
+            data: { strategy }
+        });
+        this._matDialog.afterAllClosed.subscribe(() => {
+            console.log('Get trades after close dialog');
+            this.changeDetectorRefs.detectChanges();
         });
     }
 
@@ -176,33 +202,6 @@ export class StrategyComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
 
     private _setChartData(data: any): void {
-        // const chart = cloneDeep(this.initialChart);
-        // realised.forEach(realValue, index){
-        //     this.initialChart.xaxis.categories = Object.keys(realised);
-        //     const realValues = Object.values(realised);
-        //     const unrealValues = Object.values(unrealised);
-        //     this.initialChart.series = [{
-        //         name: 'Realised Profit',
-        //         data: realValues
-        //     }, {
-        //         name: 'Unrealised Profit',
-        //         data: unrealValues
-        //     }];
-        // }
-
-
-
         this.initialChart.series = data.series;
-
-        // this.initialChart.xaxis.categories = Object.keys(realised);
-        // const realValues = Object.values(realised);
-        // const unrealValues = Object.values(unrealised);
-        // this.initialChart.series = [{
-        //     name: 'Realised Profit',
-        //     data: realValues
-        // }, {
-        //     name: 'Unrealised Profit',
-        //     data: unrealValues
-        // }];
     }
 }
